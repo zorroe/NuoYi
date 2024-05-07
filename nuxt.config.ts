@@ -1,6 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  devtools: { enabled: true },
+  devtools: { enabled: false },
   modules: [
     '@unocss/nuxt',
     ['@vueuse/nuxt',
@@ -10,7 +10,9 @@ export default defineNuxtConfig({
     ['@element-plus/nuxt',
       {
         autoImport: [
-          'ElMessage'
+          'ElMessage',
+          'ElMessageBox',
+          'ElNotification'
         ]
       }],
     ['@pinia/nuxt',
