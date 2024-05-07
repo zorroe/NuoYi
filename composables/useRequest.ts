@@ -35,11 +35,15 @@ export const useRequest = async (url: string, options: object) => {
         },
     };
     const newOptions: object = { ...defaultOptions, ...options };
-    const loadingInstance = ElLoading.service({ fullscreen: false });
-    const { data, pending, refresh } = await useFetch(url, newOptions);
-    console.log(`data: ${data}, pending: ${pending}, refresh: ${refresh}`)
-    if (!pending.value) {
+    const loadingInstance = ElLoading.service({ fullscreen: true });
+    try {
+        const { data, refresh } = await useFetch(url, newOptions);
+        return { data, refresh };
+    } catch {
+        ElMessage.error('请求失败');
+        return { data: null, refresh: () => { } }
+    } finally {
         loadingInstance.close();
     }
-    return { data, refresh };
+
 };

@@ -18,10 +18,9 @@ const handleClick = () => {
   })
 }
 
-onMounted(() => {
-  useRequest('/captchaImage', { method: 'get' }).then(res => {
-    console.log(res)
-  })
+onMounted(async () => {
+  const res = await useRequest('/captchaImage', { method: 'get' })
+  console.log(res.data)
 })
 </script>
 
