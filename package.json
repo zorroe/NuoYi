@@ -1,0 +1,27 @@
+{
+  "name": "nuoyi",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "nuxt": "^3.11.2",
+    "vue": "^3.4.21",
+    "vue-router": "^4.3.0"
+  },
+  "devDependencies": {
+    "@pinia/nuxt": "^0.5.1",
+    "@element-plus/nuxt": "^1.0.9",
+    "@iconify-json/material-symbols": "^1.1.79",
+    "@unocss/nuxt": "^0.59.4",
+    "@vueuse/core": "^10.9.0",
+    "@vueuse/nuxt": "^10.9.0",
+    "pinia": "^2.1.7",
+    "lodash": "^4.17.21"
+  }
+}
