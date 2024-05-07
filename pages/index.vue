@@ -17,6 +17,12 @@ const handleClick = () => {
     type: 'success',
   })
 }
+
+onMounted(() => {
+  useRequest('/captchaImage', { method: 'get' }).then(res => {
+    console.log(res)
+  })
+})
 </script>
 
 <style scoped></style>
