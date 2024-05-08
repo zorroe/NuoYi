@@ -8,6 +8,9 @@
   >
   <div class="font-sans">Hello World</div>
   <div class="font-sans font-bold">白日依山尽</div>
+  <NuxtLink to="/login"
+    ><el-button type="primary">登陆页面</el-button>
+  </NuxtLink>
 </template>
 
 <script setup lang="ts">
