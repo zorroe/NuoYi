@@ -1,8 +1,14 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  runtimeConfig: {
-    public: {
-      baseUrl: process.env.BASE_URL,
+  nitro: {
+    devProxy: {
+      '/prod-api': { target: process.env.BASE_URL, changeOrigin: true },
+    },
+  },
+  // 该配置用于服务端请求转发
+  routeRules: {
+    '/prod-api/**': {
+      proxy: process.env.BASE_URL + '/**',
     }
   },
   devtools: { enabled: false },

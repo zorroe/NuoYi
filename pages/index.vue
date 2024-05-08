@@ -12,7 +12,7 @@
 
 <script setup lang="ts">
 const handleClick = async () => {
-  const res = await useGet('captchaImage', { timestamp: Date.now() })
+  const res = await useGet('/prod-api/captchaImage', { timestamp: Date.now() })
   console.log(res)
 }
 </script>

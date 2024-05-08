@@ -1,7 +1,6 @@
 import { createFetch } from "@vueuse/core";
 
 const fetch = createFetch({
-    baseUrl: "http://110.42.210.221:8080",
     options: {
         async beforeFetch({ url, options, cancel }) {
             const token = localStorage.getItem('token')
