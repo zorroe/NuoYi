@@ -11,17 +11,10 @@
 </template>
 
 <script setup lang="ts">
-const handleClick = () => {
-  ElMessage({
-    message: 'Hello, Element Plus!',
-    type: 'success',
-  })
+const handleClick = async () => {
+  const res = await useGet('captchaImage', { timestamp: Date.now() })
+  console.log(res)
 }
-
-onMounted(async () => {
-  const res = await useRequest('/captchaImage', { method: 'get' })
-  console.log(res.data)
-})
 </script>
 
 <style scoped></style>

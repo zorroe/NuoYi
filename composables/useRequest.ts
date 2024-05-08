@@ -1,49 +1,43 @@
-type Response = {
-    url: string;
-    body: any,
-    status: number;
-    type: string,
-    statusText?: string;
-    _data?: any;
-    headers?: object,
-    ok?: boolean,
-    redirected?: boolean,
-    bodyUsed?: boolean,
-};
+import { createFetch } from "@vueuse/core";
 
-type ResponseData = {
-    code: number,
-    msg: string,
-    data: object | object[]
-}
+const fetch = createFetch({
+    baseUrl: "http://110.42.210.221:8080",
+    options: {
+        async beforeFetch({ url, options, cancel }) {
+            const token = localStorage.getItem('token')
+            if (!token) {
+                console.log('token不存在')
+            }
 
-export const useRequest = async (url: string, options: object) => {
-    const runtimeConfig = useRuntimeConfig();
-    const headers = {
-        Authorization: 'Bearer ' + localStorage.getItem('token') || null,
-    };
-    const defaultOptions: object = {
-        //baseURL也可以在nuxt.config.ts中定义然后此处引入
-        baseURL: runtimeConfig.public.baseUrl,
-        headers,
-        //响应拦截
-        onResponse({ response }: { response: Response }) {
-            const data = response._data;
+            options.headers = {
+                ...options.headers,
+                // Authorization: `Bearer ${token}`,
+            }
+
+            return {
+                options,
+            }
+        },
+
+        async afterFetch({ response, data }) {
             if (data.code !== 200) {
                 ElMessage.error(data.msg);
             }
+            return data;
         },
-    };
-    const newOptions: object = { ...defaultOptions, ...options };
-    const loadingInstance = ElLoading.service({ fullscreen: true });
-    try {
-        const { data, refresh } = await useFetch(url, newOptions);
-        return { data, refresh };
-    } catch {
-        ElMessage.error('请求失败');
-        return { data: null, refresh: () => { } }
-    } finally {
-        loadingInstance.close();
-    }
+    },
+    fetchOptions: {
+        mode: 'cors',
+    },
+})
 
-};
+
+export const useGet = (url: string, params?: any) => {
+    const query = new URLSearchParams(params)
+    url += `?${query}`
+    return fetch(url, { method: 'GET' }).json()
+}
+
+export const usePost = (url: string, data: any) => {
+    return fetch(url, { method: 'POST', body: data }).json()
+}
