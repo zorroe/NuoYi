@@ -1,42 +1,50 @@
-import { createFetch } from "@vueuse/core";
-
-const fetch = createFetch({
-    options: {
-        async beforeFetch({ url, options, cancel }) {
-            const token = localStorage.getItem('token')
-            if (!token) {
-                console.log('token不存在')
-            }
-
-            options.headers = {
-                ...options.headers,
-                // Authorization: `Bearer ${token}`,
-            }
-
-            return {
-                options,
-            }
-        },
-
-        async afterFetch({ response, data }) {
-            if (data.code !== 200) {
-                ElMessage.error(data.msg);
-            }
-            return data;
-        },
-    },
-    fetchOptions: {
-        mode: 'cors',
-    },
-})
-
-
-export const useGet = (url: string, params?: any) => {
-    const query = new URLSearchParams(params)
-    url += `?${query}`
-    return fetch(url, { method: 'GET' }).json()
+interface RequestOption {
+    url: string,
+    method?: 'GET' | 'POST' | 'PUT' | 'DELETE',
+    params?: any,
+    data?: any,
 }
 
-export const usePost = (url: string, data: any) => {
-    return fetch(url, { method: 'POST', body: data }).json()
+interface ResponseData {
+    code: number,
+    msg: string,
+    data: any,
+}
+
+const url_prefix = process.env.URL_PREFIX || '/prod-api'
+
+export const useRequest = function <T = ResponseData>(options: RequestOption) {
+    // 发送请求
+    if (!options.method) {
+        options.method = 'GET'
+    }
+    const url = url_prefix + options.url
+    return $fetch<T>(url, {
+        method: options.method,
+        params: options.params,
+        body: options.data,
+        onRequest({ request, options }) {
+            options.headers = options.headers || {}
+            const token = localStorage.getItem('token')
+            options.headers = {
+                ...options.headers,
+                'Content-Type': 'application/json',
+                Authorization: 'Bearer ' + token
+            }
+        },
+        onRequestError({ request, options, error }) {
+
+        },
+        onResponse({ request, response, options }) {
+            if (response._data.token) {
+                localStorage.setItem('token', response._data.token)
+            }
+            if (response._data.code !== 200) {
+                ElMessage.error(response._data.msg)
+            }
+        },
+        onResponseError({ request, response, options }) {
+            ElMessage.error(response.statusText)
+        }
+    })
 }
