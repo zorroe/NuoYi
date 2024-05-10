@@ -81,13 +81,16 @@
           <el-form-item
             label="验证码"
             prop="code">
-            <el-input
-              v-model="loginForm.code"
-              placeholder="验证码"
-              clearable />
-            <el-image
-              style="height: 32"
-              :src="codeImg" />
+            <div class="flex gap-4 w-full">
+              <el-input
+                v-model="loginForm.code"
+                placeholder="验证码"
+                clearable />
+              <el-image
+                style="height: 32px"
+                :src="codeImg"
+                @click="loadCaptchaImage" />
+            </div>
           </el-form-item>
           <el-form-item>
             <el-button
@@ -103,17 +106,14 @@
 </template>
 
 <script setup lang="ts">
+import loginApi from '~/api/login'
 definePageMeta({
   layout: 'login',
 })
 
-interface CaptchaResponse {
-  code: number
-  img: string
-  uuid: string
-  captchaEnabled: boolean
-  msg: string
-}
+useHead({
+  title: `登录 | ${useRuntimeConfig().public.projectName}`,
+})
 
 const loginForm = ref({
   username: '',
@@ -125,27 +125,9 @@ const loginForm = ref({
 const codeImg = ref('')
 
 const formRules = ref({
-  username: [
-    {
-      required: true,
-      message: '请输入用户名',
-      trigger: 'blur',
-    },
-  ],
-  password: [
-    {
-      required: true,
-      message: '请输入密码',
-      trigger: 'blur',
-    },
-  ],
-  code: [
-    {
-      required: true,
-      message: '请输入验证码',
-      trigger: 'blur',
-    },
-  ],
+  username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
+  password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
+  code: [{ required: true, message: '请输入验证码', trigger: 'blur' }],
 })
 
 const handleLogin = () => {
@@ -154,9 +136,9 @@ const handleLogin = () => {
 }
 
 const loadCaptchaImage = async () => {
-  const data = await useRequest<CaptchaResponse>({ url: '/captchaImage' })
-  codeImg.value = 'data:image/gif;base64,' + data.img
-  loginForm.value.uuid = data.uuid
+  const { img, uuid } = await loginApi.captchaApi()
+  codeImg.value = 'data:image/gif;base64,' + img
+  loginForm.value.uuid = uuid
 }
 
 onMounted(() => {

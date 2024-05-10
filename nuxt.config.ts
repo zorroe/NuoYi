@@ -1,5 +1,10 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  runtimeConfig: {
+    public: {
+      projectName: '管理系统',
+    }
+  },
   nitro: {
     devProxy: {
       '/prod-api': { target: process.env.BASE_URL, changeOrigin: true },
