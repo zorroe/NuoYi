@@ -12,19 +12,25 @@ export default defineNuxtConfig({
     }
   },
   devtools: { enabled: false },
+  css: ['~/assets/css/global.css'],
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: `@use "~/assets/sass/element.scss" as *;`,
+        },
+      },
+    },
+  },
+  elementPlus: {
+    importStyle: 'scss',
+  },
   modules: [
     '@unocss/nuxt',
+    '@element-plus/nuxt',
     ['@vueuse/nuxt',
       {
         autoImports: []
-      }],
-    ['@element-plus/nuxt',
-      {
-        autoImport: [
-          'ElMessage',
-          'ElMessageBox',
-          'ElNotification'
-        ]
       }],
     ['@pinia/nuxt',
       {
@@ -34,5 +40,4 @@ export default defineNuxtConfig({
         ],
       }]
   ],
-  css: ['~/assets/css/global.css']
 })
