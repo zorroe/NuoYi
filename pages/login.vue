@@ -58,6 +58,7 @@
         </div>
         <el-form
           :model="loginForm"
+          ref="loginFormRef"
           label-width="120px"
           label-position="right"
           :rules="formRules"
@@ -68,15 +69,24 @@
             <el-input
               v-model="loginForm.username"
               placeholder="用户名"
-              clearable />
+              clearable>
+              <template #prefix>
+                <el-icon><Avatar /></el-icon>
+              </template>
+            </el-input>
           </el-form-item>
           <el-form-item
             label="密码"
             prop="password">
             <el-input
               v-model="loginForm.password"
+              type="password"
               placeholder="密码"
-              clearable />
+              clearable>
+              <template #prefix>
+                <el-icon><Lock /></el-icon>
+              </template>
+            </el-input>
           </el-form-item>
           <el-form-item
             label="验证码"
@@ -84,8 +94,12 @@
             <div class="flex gap-4 w-full">
               <el-input
                 v-model="loginForm.code"
-                placeholder="验证码"
-                clearable />
+                autofocus
+                clearable>
+                <template #prefix>
+                  <el-icon><FolderChecked /></el-icon>
+                </template>
+              </el-input>
               <el-image
                 style="height: 32px"
                 :src="codeImg"
@@ -116,13 +130,14 @@ useHead({
 })
 
 const loginForm = ref({
-  username: '',
-  password: '',
+  username: 'admin',
+  password: 'admin123',
   code: '',
   uuid: '',
 })
 
 const codeImg = ref('')
+const loginFormRef = ref()
 
 const formRules = ref({
   username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
@@ -130,9 +145,21 @@ const formRules = ref({
   code: [{ required: true, message: '请输入验证码', trigger: 'blur' }],
 })
 
-const handleLogin = () => {
-  console.log('登录')
-  ElMessage.success('登录成功')
+const handleLogin = async () => {
+  const valid = await loginFormRef.value.validate()
+  if (!valid) return
+  const data = {
+    ...loginForm.value,
+    uuid: loginForm.value.uuid,
+  }
+  const { code } = await loginApi.loginApi(data)
+  if (code === 200) {
+    ElMessage.success('登录成功')
+    navigateTo('/')
+  } else {
+    loadCaptchaImage()
+    loginFormRef.value.resetFields()
+  }
 }
 
 const loadCaptchaImage = async () => {
