@@ -1,3 +1,9 @@
+interface CommonResponse {
+  code: number
+  msg: string
+  data: any
+}
+
 interface CaptchaResponse {
   code: number
   img: string
@@ -12,6 +18,14 @@ interface LoginResponse {
   token: string
 }
 
+interface InfoResponse {
+  code: number
+  msg: string
+  permissions: string[]
+  roles: string[]
+  user: any
+}
+
 export default {
   captchaApi() {
     return useRequest<CaptchaResponse>({
@@ -24,6 +38,20 @@ export default {
       url: '/login',
       method: 'POST',
       data,
+    })
+  },
+
+  getInfoApi() {
+    return useRequest<InfoResponse>({
+      url: '/getInfo',
+      method: 'GET',
+    })
+  },
+
+  getRouterApi() {
+    return useRequest<CommonResponse>({
+      url: '/getRouters',
+      method: 'GET',
     })
   }
 }

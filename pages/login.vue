@@ -71,7 +71,7 @@
           <p class="mt-4 leading-relaxed text-black">
             <NuxtLink
               target="_blank"
-              class="text-black" 
+              class="text-black"
               to="https://doc.ruoyi.vip/"
               >RuoYi</NuxtLink
             >
@@ -180,6 +180,8 @@ const handleLogin = async () => {
   }
   const { code } = await loginApi.loginApi(data)
   if (code === 200) {
+    await getInfo()
+    await getRouters()
     ElMessage.success('登录成功')
     navigateTo('/')
   } else {
@@ -192,6 +194,16 @@ const loadCaptchaImage = async () => {
   const { img, uuid } = await loginApi.captchaApi()
   codeImg.value = 'data:image/gif;base64,' + img
   loginForm.value.uuid = uuid
+}
+
+const getInfo = async () => {
+  const data = await loginApi.getInfoApi()
+  console.log(data)
+}
+
+const getRouters = async () => {
+  const data = await loginApi.getRouterApi()
+  console.log(data)
 }
 
 onMounted(() => {
