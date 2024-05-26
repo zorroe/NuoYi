@@ -23,10 +23,24 @@
           </svg>
         </NuxtLink>
         <h2 class="mt-6 text-2xl font-bold text-white sm:text-3xl md:text-4xl">
-          标题
+          后台管理系统
         </h2>
 
-        <p class="mt-4 leading-relaxed text-white/90">副标题</p>
+        <p class="mt-4 leading-relaxed text-white/90">
+          <NuxtLink
+            target="_blank"
+            class="text-white"
+            to="https://doc.ruoyi.vip/"
+            >RuoYi</NuxtLink
+          >
+          &
+          <NuxtLink
+            target="_blank"
+            class="text-white"
+            to="https://nuxt.com/"
+            >Nuxt3</NuxtLink
+          >
+        </p>
       </div>
     </section>
 
@@ -51,57 +65,69 @@
 
           <h1
             class="mt-2 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">
-            标题
+            后台管理系统
           </h1>
 
-          <p class="mt-4 leading-relaxed text-gray-500">副标题</p>
+          <p class="mt-4 leading-relaxed text-black">
+            <NuxtLink
+              target="_blank"
+              class="text-black" 
+              to="https://doc.ruoyi.vip/"
+              >RuoYi</NuxtLink
+            >
+            &
+            <NuxtLink
+              target="_blank"
+              class="text-black"
+              to="https://nuxt.com/"
+              >Nuxt3</NuxtLink
+            >
+          </p>
         </div>
         <el-form
           :model="loginForm"
           ref="loginFormRef"
-          label-width="120px"
           label-position="right"
           :rules="formRules"
           style="max-width: 600px; width: 500px">
-          <el-form-item
-            label="用户名"
-            prop="username">
+          <el-form-item prop="username">
             <el-input
               v-model="loginForm.username"
               placeholder="用户名"
+              size="large"
               clearable>
               <template #prefix>
-                <el-icon><Avatar /></el-icon>
+                <div
+                  class="i-material-symbols:account-circle w-1em h-1em"></div>
               </template>
             </el-input>
           </el-form-item>
-          <el-form-item
-            label="密码"
-            prop="password">
+          <el-form-item prop="password">
             <el-input
               v-model="loginForm.password"
               type="password"
               placeholder="密码"
+              size="large"
               clearable>
               <template #prefix>
-                <el-icon><Lock /></el-icon>
+                <div class="i-material-symbols:lock-outline w-1em h-1em"></div>
               </template>
             </el-input>
           </el-form-item>
-          <el-form-item
-            label="验证码"
-            prop="code">
+          <el-form-item prop="code">
             <div class="flex gap-4 w-full">
               <el-input
                 v-model="loginForm.code"
                 autofocus
+                size="large"
                 clearable>
                 <template #prefix>
-                  <el-icon><FolderChecked /></el-icon>
+                  <div
+                    class="i-material-symbols:code-blocks-outline-rounded w-1em h-1em"></div>
                 </template>
               </el-input>
               <el-image
-                style="height: 32px"
+                style="height: 40px"
                 :src="codeImg"
                 @click="loadCaptchaImage" />
             </div>
