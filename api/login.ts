@@ -1,26 +1,23 @@
-interface CommonResponse {
+interface BaseResponse {
   code: number
   msg: string
+}
+
+interface CommonResponse extends BaseResponse {
   data: any
 }
 
-interface CaptchaResponse {
-  code: number
+interface CaptchaResponse extends BaseResponse {
   img: string
   uuid: string
   captchaEnabled: boolean
-  msg: string
 }
 
-interface LoginResponse {
-  code: number,
-  msg: string,
+interface LoginResponse extends BaseResponse {
   token: string
 }
 
-interface InfoResponse {
-  code: number
-  msg: string
+interface InfoResponse extends BaseResponse {
   permissions: string[]
   roles: string[]
   user: any
