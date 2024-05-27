@@ -3,6 +3,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       projectName: '管理系统',
+      switchDuration: 10000
     }
   },
   nitro: {

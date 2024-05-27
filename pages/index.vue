@@ -1,7 +1,10 @@
 <template>
-  <div
-    class="i-material-symbols:10k-outline-rounded w-1em h-1em text-black"></div>
-  <el-button type="danger">测试</el-button>
+  <div class="i-material-symbols:10k-outline-rounded w-1em h-1em"></div>
+  <el-button
+    type="danger"
+    @click="handleTest"
+    >测试</el-button
+  >
   <el-button
     type="primary"
     @click="toggleDark()"
@@ -31,9 +34,14 @@ useHead({
 
 const inputRef = ref()
 
-onMounted(() => {})
+const toggleDark = inject('toggle-appearance', () => {})
 
-const toggleDark = useToggle(useDark())
+const handleTest = () => {
+  ElMessage.success('测试成功')
+  ElMessage.error('测试失败')
+  ElMessage.warning('测试警告')
+  ElMessage.info('测试提示')
+}
 </script>
 
 <style scoped></style>
