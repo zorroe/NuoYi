@@ -10,8 +10,8 @@
           class="w-1em h-1em"></div>
       </el-icon>
       <template #title>
-        <span>{{ item.meta?.title }}</span></template
-      >
+        <span>{{ item.meta?.title }}</span>
+      </template>
     </el-menu-item>
     <el-sub-menu
       v-else

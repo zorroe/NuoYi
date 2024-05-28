@@ -21,26 +21,7 @@ export default defineNuxtPlugin((nuxtApp) => {
 
     router.beforeEach((to, from, next) => {
         NProgress.start()
-        if (getToken()) {
-            to.meta.title && console.log(to.meta.title)
-            if (to.path === '/login') {
-                next({ path: '/' })
-                NProgress.done()
-            } else if (whiteList.indexOf(to.path) !== -1) {
-                next()
-            } else {
-                next()
-            }
-        } else {
-            next()
-            // if (whiteList.indexOf(to.path) !== -1) {
-            //     // 在免登录白名单，直接进入
-            //     next()
-            // } else {
-            //     next(`/login?redirect=${to.fullPath}`) // 否则全部重定向到登录页
-            //     NProgress.done()
-            // }
-        }
+        next()
     })
 
     router.afterEach(() => {

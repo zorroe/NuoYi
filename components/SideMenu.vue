@@ -1,19 +1,27 @@
 <template>
   <!-- 侧边栏菜单 -->
-  <el-menu
-    :collapse="isCollapse"
-    router
-    class="el-menu-vertical">
-    <MenuItem
-      v-for="item in constantRoutes"
-      :key="item.path"
-      :item="item" />
-  </el-menu>
+  <el-scrollbar
+    :wrap-style="{
+      backgroundColor: '#304156',
+      boxShadow: '0 2px 12px 0 rgba(0, 0, 0, 0.1)',
+    }">
+    <el-menu
+      :collapse="isCollapse"
+      router
+      background-color="#304156"
+      text-color="#bfcbd9"
+      class="el-menu-vertical">
+      <MenuItem
+        v-for="item in constantRoutes"
+        :key="item.path"
+        :item="item" />
+    </el-menu>
+  </el-scrollbar>
 </template>
 
 <script setup lang="ts">
 import { constantRoutes } from '../utils/constants'
-const props = defineProps({
+defineProps({
   isCollapse: {
     type: Boolean,
     default: false,
@@ -25,5 +33,9 @@ const props = defineProps({
 .el-menu-vertical:not(.el-menu--collapse) {
   width: 200px;
   min-height: 400px;
+}
+
+.el-menu-vertical {
+  border-right: none;
 }
 </style>
