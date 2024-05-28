@@ -6,7 +6,6 @@ export default defineNuxtConfig({
     }
   },
   nitro: {
-    preset: 'vercel',
     devProxy: {
       '/prod-api': { target: process.env.BASE_URL, changeOrigin: true },
     },

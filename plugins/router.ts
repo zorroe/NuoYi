@@ -29,19 +29,18 @@ export default defineNuxtPlugin((nuxtApp) => {
             } else if (whiteList.indexOf(to.path) !== -1) {
                 next()
             } else {
-                if (useUserStore().roles.length === 0) {
-                    isRelogin.show = true
-                    useUserStore().getInfo().then(() => {
-                        isRelogin.show = false
-                    }).catch(err => {
-                        loginApi.getRouterApi().then(res => {
-                            console.log(res)
-                        })
-                    })
-                }
+                next()
             }
+        } else {
+            next()
+            // if (whiteList.indexOf(to.path) !== -1) {
+            //     // 在免登录白名单，直接进入
+            //     next()
+            // } else {
+            //     next(`/login?redirect=${to.fullPath}`) // 否则全部重定向到登录页
+            //     NProgress.done()
+            // }
         }
-        next()
     })
 
     router.afterEach(() => {
