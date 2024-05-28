@@ -46,4 +46,7 @@ export default defineNuxtConfig({
         ],
       }]
   ],
+  plugins: [
+    {src: '~/plugins/router.ts', mode: 'client'}
+  ]
 })

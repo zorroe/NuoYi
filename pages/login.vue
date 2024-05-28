@@ -1,40 +1,22 @@
 <template>
   <div class="lg:grid lg:min-h-screen lg:grid-cols-12">
-    <section
-      class="relative flex h-32 items-end lg:col-span-5 lg:h-full xl:col-span-6">
-      <img
-        alt=""
+    <section class="relative flex h-32 items-end lg:col-span-5 lg:h-full xl:col-span-6">
+      <img alt=""
         src="https://images.unsplash.com/photo-1617195737496-bc30194e3a19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
         class="absolute inset-0 h-full w-full object-cover opacity-80" />
     </section>
-    <main
-      class="flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6">
+    <main class="flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6">
       <div class="max-w-xl lg:max-w-3xl">
-        <el-form
-          :model="loginForm"
-          ref="loginFormRef"
-          label-position="right"
-          :rules="formRules"
-          style="max-width: 600px; width: 500px">
+        <el-form :model="loginForm" ref="loginFormRef" label-position="right" :rules="formRules" style="width: 500px">
           <el-form-item prop="username">
-            <el-input
-              v-model="loginForm.username"
-              placeholder="用户名"
-              size="large"
-              clearable>
+            <el-input v-model="loginForm.username" placeholder="用户名" size="large">
               <template #prefix>
-                <div
-                  class="i-material-symbols:account-circle w-1em h-1em"></div>
+                <div class="i-material-symbols:account-circle w-1em h-1em"></div>
               </template>
             </el-input>
           </el-form-item>
           <el-form-item prop="password">
-            <el-input
-              v-model="loginForm.password"
-              type="password"
-              placeholder="密码"
-              size="large"
-              clearable>
+            <el-input v-model="loginForm.password" type="password" placeholder="密码" size="large">
               <template #prefix>
                 <div class="i-material-symbols:lock-outline w-1em h-1em"></div>
               </template>
@@ -42,28 +24,16 @@
           </el-form-item>
           <el-form-item prop="code">
             <div class="flex gap-4 w-full">
-              <el-input
-                v-model="loginForm.code"
-                autofocus
-                size="large"
-                clearable>
+              <el-input v-model="loginForm.code" size="large">
                 <template #prefix>
-                  <div
-                    class="i-material-symbols:code-blocks-outline-rounded w-1em h-1em"></div>
+                  <div class="i-material-symbols:code-blocks-outline-rounded w-1em h-1em"></div>
                 </template>
               </el-input>
-              <el-image
-                style="height: 40px"
-                :src="codeImg"
-                @click="loadCaptchaImage" />
+              <el-image style="height: 40px" :src="codeImg" @click="loadCaptchaImage" />
             </div>
           </el-form-item>
           <el-form-item>
-            <el-button
-              type="primary"
-              @click="handleLogin"
-              >登录</el-button
-            >
+            <el-button type="primary" @click="handleLogin">登录</el-button>
           </el-form-item>
         </el-form>
       </div>
@@ -73,8 +43,13 @@
 
 <script setup lang="ts">
 import loginApi from '~/api/login'
+import { useUserStore } from '~/store/user'
+
+const userStore = useUserStore()
+
 definePageMeta({
   layout: 'login',
+  title: '登录',
 })
 
 useHead({

@@ -1,4 +1,4 @@
-import { getToken } from "~/utils/auth"
+import { getToken, removeToken, setToken } from "~/utils/auth"
 import loginApi from '~/api/login'
 import defAva from '@/assets/images/avatar.png'
 
@@ -52,5 +52,19 @@ export const useUserStore = defineStore(
                     })
                 })
             },
+
+            logout() {
+                return new Promise((resolve, reject) => {
+                    loginApi.logoutApi().then(() => {
+                        this.token = ''
+                        this.roles = []
+                        this.permissions = []
+                        removeToken()
+                        resolve(true)
+                    }).catch(error => {
+                        reject(error)
+                    })
+                })
+            }
         }
     })

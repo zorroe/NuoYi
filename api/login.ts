@@ -45,6 +45,13 @@ export default {
     })
   },
 
+  logoutApi() {
+    return useRequest<BaseResponse>({
+      url: '/logout',
+      method: 'POST',
+    })
+  },
+
   getRouterApi() {
     return useRequest<CommonResponse>({
       url: '/getRouters',

@@ -13,6 +13,8 @@ interface ResponseData {
 
 const url_prefix = process.env.URL_PREFIX || '/prod-api'
 
+export const isRelogin = { show: false }
+
 export const useRequest = function <T = ResponseData>(options: RequestOption) {
     // 发送请求
     if (!options.method) {

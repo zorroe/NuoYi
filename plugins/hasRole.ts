@@ -1,17 +1,29 @@
+import { useUserStore } from "~/store/user";
+
 export default defineNuxtPlugin((nuxtApp) => {
     nuxtApp.vueApp.directive('hasRole', {
-        mounted: (el, binding, vnode, prevVnode) => {
+        mounted: (el, binding) => {
             const { value } = binding
-            console.log("检查是否拥有权限", value)
-            if (value.includes('admin')) {
+            const super_admin = "admin";
+            const roles = useUserStore().roles
 
+            if (value && value instanceof Array && value.length > 0) {
+                const roleFlag = value
+
+                const hasRole = roles.some(role => {
+                    return super_admin === role || roleFlag.includes(role)
+                })
+
+                if (!hasRole) {
+                    el.parentNode && el.parentNode.removeChild(el)
+                }
             } else {
-                el.parentNode && el.parentNode.removeChild(el)
+                throw new Error(`请设置角色权限标签值`)
             }
         },
         getSSRProps(binding, vnode) {
             // 你可以在这里提供SSR特定的props
             return {}
         }
-    })  
+    })
 })
