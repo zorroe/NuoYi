@@ -6,7 +6,6 @@
  definePageMeta({
   title: '角色管理',
   icon: 'i-material-symbols:person-outline-rounded',
-  hidden: false
 })
 </script>
 
