@@ -5,7 +5,7 @@
 <script setup lang="ts">
  definePageMeta({
   title: '角色管理',
-  icon: 'i-ant-design:user-outlined',
+  icon: 'i-material-symbols:person-outline-rounded',
   hidden: false
 })
 </script>

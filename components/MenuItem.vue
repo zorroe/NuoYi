@@ -1,5 +1,5 @@
 <template>
-  <template v-if="!item.hidden">
+  <template v-if="!item.meta.hidden">
     <el-menu-item
       v-if="!item.children"
       :route="item.path"

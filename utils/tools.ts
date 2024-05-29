@@ -1,4 +1,6 @@
-const generatepName = (data: any) => {
+import type { RouteRecordRaw } from "vue-router"
+
+const generatepName = (data: Readonly<RouteRecordRaw[]>) => {
     data.forEach((item: any) => {
         const paths = item.name.split("-")
         // 截取列表从第一个到倒数第二个
@@ -7,7 +9,7 @@ const generatepName = (data: any) => {
     })
 }
 
-const generateChild = (root: any, list: any) => {
+const generateChild = (root: RouteRecordRaw, list: any) => {
     list.forEach((item: any) => {
         if (item.pName === root.name) {
             if (root.children) {
@@ -24,7 +26,7 @@ const generateChild = (root: any, list: any) => {
     }
 }
 
-export const generateTreeData = (data: any) => {
+export const generateTreeData = (data: Readonly<RouteRecordRaw[]>) => {
     generatepName(data)
     const treeData = data.filter((item: any) => item.pName === "")
     treeData.forEach((item: any) => {
