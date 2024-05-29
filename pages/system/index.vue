@@ -10,7 +10,7 @@
 
 <script setup lang="ts">
 definePageMeta({
-  title: '部门管理',
+  title: '系统管理',
   icon: 'i-material-symbols:account-tree-outline-rounded',
   hidden: false,
 })

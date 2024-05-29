@@ -49,7 +49,9 @@ const userStore = useUserStore()
 
 definePageMeta({
   layout: 'login',
+  icon: 'i-material-symbols:login-rounded',
   title: '登录',
+  hidden: true
 })
 
 useHead({

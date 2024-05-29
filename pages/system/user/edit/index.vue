@@ -1,13 +1,14 @@
 <template>
-  <div>用户管理</div>
+  <div>编辑用户</div>
 </template>
 
 <script setup lang="ts">
 definePageMeta({
-  title: '用户管理',
-  icon: 'i-material-symbols:person-outline-rounded',
+  title: '编辑用户',
+  icon: 'i-material-symbols:person-edit-outline-rounded',
   hidden: true,
 })
+
 </script>
 
 <style scoped></style>

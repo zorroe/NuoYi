@@ -12,7 +12,7 @@
       text-color="#bfcbd9"
       class="el-menu-vertical">
       <MenuItem
-        v-for="item in constantRoutes"
+        v-for="item in routes"
         :key="item.path"
         :item="item" />
     </el-menu>
@@ -20,7 +20,10 @@
 </template>
 
 <script setup lang="ts">
-import { constantRoutes } from '../utils/constants'
+import { generateTreeData } from '~/utils/tools'
+
+const router = useRouter()
+const routes = generateTreeData(router.options.routes)
 defineProps({
   isCollapse: {
     type: Boolean,
