@@ -40,6 +40,10 @@ const props = defineProps({
     type: Object,
     required: true,
   },
+  isCollapse: {
+    type: Boolean,
+    default: false,
+  },
 })
 </script>
 

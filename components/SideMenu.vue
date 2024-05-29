@@ -6,7 +6,7 @@
       boxShadow: '0 2px 12px 0 rgba(0, 0, 0, 0.1)',
     }">
     <el-menu
-      :collapse="isCollapse"
+      :collapse="settingStore.sideMenuCollapsed"
       router
       background-color="#304156"
       text-color="#bfcbd9"
@@ -21,15 +21,14 @@
 
 <script setup lang="ts">
 import { generateTreeData } from '~/utils/tools'
+import { useSettingsStore } from '~/store/settings';
+
+const settingStore = useSettingsStore()
 
 const router = useRouter()
-const routes = generateTreeData(router.options.routes)
-defineProps({
-  isCollapse: {
-    type: Boolean,
-    default: false,
-  },
-})
+const routes = generateTreeData(
+  JSON.parse(JSON.stringify(router.options.routes))
+)
 </script>
 
 <style scoped>
