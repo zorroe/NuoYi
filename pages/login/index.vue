@@ -54,10 +54,6 @@ definePageMeta({
   hidden: true
 })
 
-useHead({
-  title: `登录 | ${useRuntimeConfig().public.projectName}`,
-})
-
 const loginForm = ref({
   username: 'admin',
   password: 'admin123',

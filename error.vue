@@ -5,8 +5,8 @@
   </div>
 </template>
 <script setup lang="ts">
-useHead({
-  title: `404 | ${useRuntimeConfig().public.projectName}`,
+definePageMeta({
+  title: 'Ahh...'
 })
 
 const handleError = () => {

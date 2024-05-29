@@ -5,6 +5,7 @@
 </template>
 
 <script setup lang="ts">
+
 const isDark = useDark()
 function enableTransitions() {
   return (

@@ -18,8 +18,10 @@ const whiteList = ['/login', '/register'];
 export default defineNuxtPlugin((nuxtApp) => {
     // 添加你的插件逻辑
     const router = useRouter()
-
     router.beforeEach((to, from, next) => {
+        useHead({
+            title: `${to.meta.title} | ${useRuntimeConfig().public.projectName}`,
+        })
         NProgress.start()
         next()
     })
