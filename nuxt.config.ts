@@ -1,5 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  ssr: false,
   runtimeConfig: {
     public: {
       projectName: '管理系统'
@@ -46,6 +47,6 @@ export default defineNuxtConfig({
       }]
   ],
   plugins: [
-    {src: '~/plugins/router.ts', mode: 'client'}
+    { src: '~/plugins/router.ts', mode: 'client' }
   ]
 })

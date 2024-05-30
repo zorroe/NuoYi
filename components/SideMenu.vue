@@ -6,7 +6,7 @@
       boxShadow: '0 2px 12px 0 rgba(0, 0, 0, 0.1)',
     }">
     <el-menu
-      :collapse="settingStore.sideMenuCollapsed"
+      :collapse="settingStore.sideMenuCollapse"
       router
       background-color="#304156"
       text-color="#bfcbd9"

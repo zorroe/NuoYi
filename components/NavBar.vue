@@ -1,7 +1,7 @@
 <template>
   <div class="h-12 bg-gray-200 flex items-center pl-2 cursor-default gap-2">
     <div
-      v-if="settingStore.sideMenuCollapsed"
+      v-if="settingStore.sideMenuCollapse"
       class="p-2 content-center hover:bg-gray-300 rounded-md"
       @click="settingStore.toggleCollapse()">
       <div
@@ -25,13 +25,12 @@
 </template>
 
 <script setup lang="ts">
-import { useSettingsStore } from '~/store/settings';
+import { useSettingsStore } from '~/store/settings'
 
 const settingStore = useSettingsStore()
 
 const router = useRouter()
 const matchRoute = router.currentRoute
-
 
 const breadcrumbs = computed(() => {
   const paths = matchRoute.value.name?.toString().split('-') || []

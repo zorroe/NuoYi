@@ -17,6 +17,7 @@
   "devDependencies": {
     "@element-plus/nuxt": "^1.0.9",
     "@iconify-json/material-symbols": "^1.1.79",
+    "@pinia-plugin-persistedstate/nuxt": "^1.2.0",
     "@pinia/nuxt": "^0.5.1",
     "@types/js-cookie": "^3.0.6",
     "@types/nprogress": "^0.2.3",

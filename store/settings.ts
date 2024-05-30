@@ -1,13 +1,14 @@
-export const useSettingsStore = defineStore('settings', {
-    state: () => ({
-        'sideMenuCollapsed': useLocalStorage('sideMenuCollapsed', false),
-    }),
-    getters: {
-        //
-    },
-    actions: {
-        toggleCollapse() {
-            this.sideMenuCollapsed = !this.sideMenuCollapsed
-        }
-    },
+
+export const useSettingsStore = defineStore('settings', () => {
+
+    const sideMenuCollapse = useLocalStorage('sideMenuCollapse',  false)
+
+    const toggleCollapse = () => {
+        sideMenuCollapse.value = !sideMenuCollapse.value
+    }
+
+    return {
+        sideMenuCollapse,
+        toggleCollapse
+    }
 })
