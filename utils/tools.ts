@@ -11,7 +11,7 @@ const generatepName = (data: Readonly<RouteRecordRaw[]>) => {
 
 const generateChild = (root: RouteRecordRaw, list: any) => {
     list.forEach((item: any) => {
-        if (item.pName === root.name) {
+        if (item.pName === root.name && !item.meta.hidden) {
             if (root.children) {
                 root.children.push(item)
             } else {

@@ -1,7 +1,7 @@
 <template>
   <template v-if="!item.meta.hidden">
     <el-menu-item
-      v-if="!item.children"
+      v-if="!item.children || item.children.length === 0"
       :route="item.path"
       :index="item.path">
       <el-icon>
@@ -39,10 +39,6 @@ const props = defineProps({
   item: {
     type: Object,
     required: true,
-  },
-  isCollapse: {
-    type: Boolean,
-    default: false,
   },
 })
 </script>

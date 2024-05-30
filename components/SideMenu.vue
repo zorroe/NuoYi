@@ -8,6 +8,7 @@
     <el-menu
       :collapse="settingStore.sideMenuCollapse"
       router
+      :default-active="$route.path"
       background-color="#304156"
       text-color="#bfcbd9"
       class="el-menu-vertical">
@@ -21,13 +22,12 @@
 
 <script setup lang="ts">
 import { generateTreeData } from '~/utils/tools'
-import { useSettingsStore } from '~/store/settings';
+import { useSettingsStore } from '~/store/settings'
 
 const settingStore = useSettingsStore()
 
-const router = useRouter()
 const routes = generateTreeData(
-  JSON.parse(JSON.stringify(router.options.routes))
+  JSON.parse(JSON.stringify(useRouter().options.routes))
 )
 </script>
 

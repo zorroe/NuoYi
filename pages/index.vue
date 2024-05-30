@@ -1,9 +1,5 @@
 <template>
-  <div>
-    <NuxtLink to="/login">
-      <el-button type="primary"> 登陆 </el-button>
-    </NuxtLink>
-  </div>
+  <div>首页</div>
 </template>
 
 <script setup lang="ts">
