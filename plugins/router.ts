@@ -10,7 +10,7 @@ NProgress.configure({
     minimum: 0.1,// 初始化时的最小百分比,
 });
 
-const whiteList = ['/login', '/register'];
+const whiteList = ['/login', '/register', '/error'];
 
 export default defineNuxtPlugin((nuxtApp) => {
     // 添加你的插件逻辑

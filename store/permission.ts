@@ -13,6 +13,11 @@ export const usePermissionStore = defineStore(
                 if (this.authRoutes.length === 0) {
                     this.getAuthRoute().then(res => {
                         this.authRoutes = res as any
+                        if (this.authRoutes.length === 0) {
+                            // 跳转到错误页面
+                            ElMessage.error("您没有访问权限")
+                            useRouter().push('/error')
+                        }
                         this.generateTreeData()
                     })
                 }

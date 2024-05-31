@@ -5,8 +5,9 @@
   </div>
 </template>
 <script setup lang="ts">
-definePageMeta({
-  title: 'Ahh...'
+useHead({
+  title: '404 | Not Found',
+  meta: [{ name: 'description', content: '404 | Not Found' }],
 })
 
 const handleError = () => {
@@ -14,9 +15,6 @@ const handleError = () => {
 }
 
 onMounted(() => {
-  ElMessage.warning('如无操作，将在3秒后自动返回首页')
-  setTimeout(() => {
-    handleError()
-  }, 3000)
+  console.log(useRoute())
 })
 </script>
