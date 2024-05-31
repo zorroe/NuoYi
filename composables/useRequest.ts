@@ -1,3 +1,5 @@
+import { getToken, setToken } from "~/utils/auth"
+
 interface RequestOption {
     url: string,
     method?: 'GET' | 'POST' | 'PUT' | 'DELETE',
@@ -27,7 +29,7 @@ export const useRequest = function <T = ResponseData>(options: RequestOption) {
         body: options.data,
         onRequest({ request, options }) {
             options.headers = options.headers || {}
-            const token = localStorage.getItem('token')
+            const token = getToken()
             options.headers = {
                 ...options.headers,
                 'Content-Type': 'application/json',
@@ -39,7 +41,7 @@ export const useRequest = function <T = ResponseData>(options: RequestOption) {
         },
         onResponse({ request, response, options }) {
             if (response._data.token) {
-                localStorage.setItem('token', response._data.token)
+                setToken(response._data.token)
             }
             if (response._data.code !== 200) {
                 if (response._data.code === 401) {
