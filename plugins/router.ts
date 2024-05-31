@@ -1,9 +1,6 @@
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
-import { getToken } from '@/utils/auth'
-import { useUserStore } from '~/store/user';
-import { isRelogin } from '~/composables/useRequest';
-import loginApi from '~/api/login';
+import { usePermissionStore } from '~/store/permission';
 
 NProgress.configure({
     easing: 'ease-in', // 动画方式
@@ -22,6 +19,11 @@ export default defineNuxtPlugin((nuxtApp) => {
         useHead({
             title: `${to.meta.title} | ${useRuntimeConfig().public.projectName}`,
         })
+        if (whiteList.includes(to.path)) {
+            next()
+            return
+        }
+        usePermissionStore().generateRouter()
         NProgress.start()
         next()
     })

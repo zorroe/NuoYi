@@ -13,7 +13,7 @@
       text-color="#bfcbd9"
       class="el-menu-vertical">
       <MenuItem
-        v-for="item in routes"
+        v-for="item in usePermissionStore().routerTree"
         :key="item.path"
         :item="item" />
     </el-menu>
@@ -21,14 +21,11 @@
 </template>
 
 <script setup lang="ts">
-import { generateTreeData } from '~/utils/tools'
 import { useSettingsStore } from '~/store/settings'
+import { usePermissionStore } from '~/store/permission';
 
 const settingStore = useSettingsStore()
 
-const routes = generateTreeData(
-  JSON.parse(JSON.stringify(useRouter().options.routes))
-)
 </script>
 
 <style scoped>

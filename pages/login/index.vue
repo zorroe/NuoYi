@@ -80,7 +80,6 @@ const handleLogin = async () => {
   const { code } = await loginApi.loginApi(data)
   if (code === 200) {
     await getInfo()
-    await getRouters()
     ElMessage.success('登录成功')
     navigateTo('/')
   } else {
@@ -97,11 +96,6 @@ const loadCaptchaImage = async () => {
 
 const getInfo = async () => {
   const data = await loginApi.getInfoApi()
-  console.log(data)
-}
-
-const getRouters = async () => {
-  const data = await loginApi.getRouterApi()
   console.log(data)
 }
 

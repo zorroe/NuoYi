@@ -50,12 +50,5 @@ export default {
       url: '/logout',
       method: 'POST',
     })
-  },
-
-  getRouterApi() {
-    return useRequest<CommonResponse>({
-      url: '/getRouters',
-      method: 'GET',
-    })
   }
 }
