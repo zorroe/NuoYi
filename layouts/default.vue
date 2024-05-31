@@ -4,7 +4,9 @@
     <div class="flex-1 flex flex-col">
       <NavBar />
       <el-scrollbar class="flex-1">
-        <slot />
+        <div class="p-2">
+          <slot />
+        </div>
       </el-scrollbar>
     </div>
   </div>
