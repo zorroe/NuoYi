@@ -25,7 +25,7 @@ export const usePermissionStore = defineStore(
             getAuthRoute() {
                 return new Promise((resolve, reject) => {
                     menuApi.getRouterApi().then(res => {
-                        const data = ['index', 'system', 'system-dept', 'system-menu']
+                        const data = ['index', 'system', 'system-dept', 'system-menu', 'system-user', 'system-user-add', 'system-user-edit']
                         resolve(data)
                     }).catch(err => {
                         reject(err)
@@ -35,15 +35,16 @@ export const usePermissionStore = defineStore(
 
             generateTreeData() {
                 const allRoutes = JSON.parse(JSON.stringify(useRouter().options.routes))
-                this.generatepName(allRoutes)
-                this.routerTree = allRoutes.filter((item: any) => item.pName === "" && this.authRoutes.includes(item.name))
+                const authRoutes = allRoutes.filter((item: any) => this.authRoutes.includes(item.name))
+                this.generatepName(authRoutes)
+                this.routerTree = authRoutes.filter((item: any) => item.pName === "")
                 this.routerTree.forEach((item: any) => {
-                    this.generateChild(item, allRoutes)
+                    this.generateChild(item, authRoutes)
                 })
             },
             generateChild(root: RouteRecordRaw, list: any) {
                 list.forEach((item: any) => {
-                    if (item.pName === root.name && !item.meta.hidden && this.authRoutes.includes(item.name)) {
+                    if (item.pName === root.name && !item.meta.hidden) {
                         if (root.children) {
                             root.children.push(item)
                         } else {
