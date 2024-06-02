@@ -1,4 +1,4 @@
-export const useCombineDataRange = (params: any, dateRange: any, propName: any) => {
+export const useCombineDataRange = (params: any, dateRange: any, propName = undefined as any) => {
     let search = params;
     search.params = typeof (search.params) === 'object' && search.params !== null && !Array.isArray(search.params) ? search.params : {};
     dateRange = Array.isArray(dateRange) ? dateRange : [];
