@@ -1,4 +1,5 @@
 import { getToken, setToken } from "~/utils/auth"
+import { tansParams } from "~/utils/nuoyi"
 
 interface RequestOption {
     url: string,
@@ -21,6 +22,10 @@ export const useRequest = function <T = ResponseData>(options: RequestOption) {
     // 发送请求
     if (!options.method) {
         options.method = 'GET'
+    }
+    if (options.method === 'GET') {
+        options.params = { ...options.params, timestamp: new Date().getTime() }
+        options.params = tansParams(options.params)
     }
     const url = url_prefix + options.url
     return $fetch<T>(url, {

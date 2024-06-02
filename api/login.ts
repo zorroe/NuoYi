@@ -1,27 +1,4 @@
-interface BaseResponse {
-  code: number
-  msg: string
-}
-
-interface CommonResponse extends BaseResponse {
-  data: any
-}
-
-interface CaptchaResponse extends BaseResponse {
-  img: string
-  uuid: string
-  captchaEnabled: boolean
-}
-
-interface LoginResponse extends BaseResponse {
-  token: string
-}
-
-interface InfoResponse extends BaseResponse {
-  permissions: string[]
-  roles: string[]
-  user: any
-}
+import type { CaptchaResponse, LoginResponse, InfoResponse, BaseResponse } from "./types";
 
 export default {
   captchaApi() {

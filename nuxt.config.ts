@@ -1,3 +1,9 @@
+import Icons from 'unplugin-icons/vite'
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import IconsResolver from 'unplugin-icons/resolver'
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   ssr: false,
@@ -27,9 +33,37 @@ export default defineNuxtConfig({
         },
       },
     },
+    plugins: [
+      AutoImport({
+        resolvers: [
+          ElementPlusResolver(),
+
+          // Auto import icon components
+          // 自动导入图标组件
+          IconsResolver({
+            prefix: 'Icon',
+          }),
+        ],
+      }),
+      Components({
+        resolvers: [
+          // Auto register icon components
+          // 自动注册图标组件
+          IconsResolver(),
+          // Auto register Element Plus components
+          // 自动导入 Element Plus 组件
+          ElementPlusResolver(),
+        ],
+      }),
+      Icons({
+        autoInstall: true,
+      }),
+
+    ]
   },
   elementPlus: {
     importStyle: 'scss',
+
   },
   modules: [
     '@unocss/nuxt',
