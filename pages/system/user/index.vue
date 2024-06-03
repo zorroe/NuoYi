@@ -283,7 +283,7 @@ const searchParams = ref<UserParams>({
 const searchFormRef = ref<any>()
 const createTime = ref<any>([])
 
-const total = ref<number>(0)
+const total = ref<number>(1)
 
 const userStatusOptions = ref([
   {

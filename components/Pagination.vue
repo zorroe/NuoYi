@@ -1,7 +1,7 @@
 <template>
   <div
     :class="{ hidden: hidden }"
-    class="pagination-container">
+    class="mt-2 flex justify-end items-center">
     <el-pagination
       :background="background"
       v-model:current-page="currentPage"
