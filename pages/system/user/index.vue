@@ -2,7 +2,7 @@
   <el-row :gutter="12">
     <el-col :xs="24" :sm="24" :md="24" :lg="4" :xl="4">
       <el-scrollbar>
-        <el-tree :data="data" @node-click="handleNodeClick" />
+        <el-tree :data="deptTree" @node-click="handleNodeClick" />
       </el-scrollbar>
     </el-col>
     <el-col :xs="24" :sm="24" :md="24" :lg="20" :xl="20">
@@ -10,20 +10,20 @@
         <el-col :span="24">
           <el-form inline :label-width="80" :model="searchParams" ref="searchFormRef" label-position="left">
             <el-form-item label="用户名称" prop="userName">
-              <el-input v-model="searchParams.userName" placeholder="用户名称" clearable style="width: 200px" />
+              <el-input v-model="searchParams.userName" placeholder="用户名称" clearable style="width: 220px" />
             </el-form-item>
             <el-form-item label="手机号码" prop="phonenumber">
-              <el-input v-model="searchParams.phonenumber" placeholder="手机号码" clearable style="width: 200px" />
+              <el-input v-model="searchParams.phonenumber" placeholder="手机号码" clearable style="width: 220px" />
             </el-form-item>
             <el-form-item label="状态" prop="status">
-              <el-select v-model="searchParams.status" placeholder="用户状态" style="width: 200px">
+              <el-select v-model="searchParams.status" placeholder="用户状态" style="width: 220px">
                 <el-option v-for="item in userStatusOptions" :key="item.value" :label="item.label"
                   :value="item.value" />
               </el-select>
             </el-form-item>
             <el-form-item label="创建时间">
               <el-date-picker v-model="createTime" type="daterange" unlink-panels range-separator="至"
-                style="width: 180px" value-format="YYYY-MM-DD" format="YYYY-MM-DD" start-placeholder="开始日期"
+                style="width: 200px" value-format="YYYY-MM-DD" format="YYYY-MM-DD" start-placeholder="开始日期"
                 end-placeholder="结束日期" />
             </el-form-item>
             <el-form-item>
@@ -109,7 +109,7 @@ import {
   Refresh,
   Rank,
 } from '@element-plus/icons-vue'
-import type { UserParams, SystemUser } from '~/api/types'
+import type { UserParams, SystemUser, DeptTree } from '~/api/types'
 import userApi from '~/api/user'
 import { parseTime } from '~/utils/nuoyi'
 
@@ -133,6 +133,7 @@ const searchParams = ref<UserParams>({
   userName: undefined,
   phonenumber: undefined,
   status: undefined,
+  deptId: undefined
 })
 
 const searchFormRef = ref<any>()
@@ -155,73 +156,19 @@ const userStatusOptions = ref([
 
 const tableData = ref<SystemUser[]>([])
 
-interface Tree {
-  label: string
-  children?: Tree[]
+const handleNodeClick = (data: DeptTree) => {
+  searchParams.value.deptId = data.id
+  getList()
 }
 
-const handleNodeClick = (data: Tree) => {
-  console.log(data)
+const deptTree = ref<DeptTree[]>([])
+
+const getDept = async () => {
+  const { code, data } = await userApi.userDeptApi()
+  if (code === 200) {
+    deptTree.value = data
+  }
 }
-
-const data: Tree[] = [
-  {
-    label: 'Level one 1',
-    children: [
-      {
-        label: 'Level two 1-1',
-        children: [
-          {
-            label: 'Level three 1-1-1-1-1-1-1-1-1-1-1-1-1',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    label: 'Level one 2',
-    children: [
-      {
-        label: 'Level two 2-1',
-        children: [
-          {
-            label: 'Level three 2-1-1',
-          },
-        ],
-      },
-      {
-        label: 'Level two 2-2',
-        children: [
-          {
-            label: 'Level three 2-2-1',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    label: 'Level one 3',
-    children: [
-      {
-        label: 'Level two 3-1',
-        children: [
-          {
-            label: 'Level three 3-1-1',
-          },
-        ],
-      },
-      {
-        label: 'Level two 3-2',
-        children: [
-          {
-            label: 'Level three 3-2-1',
-          },
-        ],
-      },
-    ],
-  },
-]
-
 
 const getList = async () => {
   loading.value = true
@@ -302,12 +249,14 @@ const handleResetPwd = (row: SystemUser) => {
 
 const handleReset = () => {
   searchFormRef.value.resetFields()
+  searchParams.value.deptId = undefined
   createTime.value = []
   getList()
 }
 
 onMounted(() => {
   handleReset()
+  getDept()
 })
 </script>
 

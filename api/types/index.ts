@@ -8,8 +8,8 @@ export interface BaseResponse {
     msg: string
 }
 
-export interface CommonResponse extends BaseResponse {
-    data: any
+export interface CommonResponse<T> extends BaseResponse {
+    data: T
 }
 
 export interface CaptchaResponse extends BaseResponse {
@@ -37,6 +37,7 @@ export interface UserParams extends PageParamsBase {
     userName?: string,
     phonenumber?: string,
     status?: string | number,
+    deptId?: string | number,
     params?: {
         beginTime?: string,
         endTime?: string,
@@ -89,4 +90,10 @@ interface Dept {
     delFlag?: any;
     parentName?: any;
     children: any[];
+}
+
+export interface DeptTree {
+    id: string,
+    label: string,
+    children?: DeptTree[]
 }

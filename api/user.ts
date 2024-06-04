@@ -1,4 +1,4 @@
-import type { PageResponse, SystemUser, UserParams, BaseResponse } from "./types"
+import type { PageResponse, SystemUser, UserParams, BaseResponse, CommonResponse, DeptTree } from "./types"
 
 interface PwdParams {
     userId: string,
@@ -26,6 +26,13 @@ export default {
             url: `/system/user/resetPwd`,
             method: 'PUT',
             data,
+        })
+    },
+
+    userDeptApi() {
+        return useRequest<CommonResponse<DeptTree[]>>({
+            url: '/system/user/deptTree',
+            method: 'GET',
         })
     }
 }
