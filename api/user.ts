@@ -1,5 +1,9 @@
 import type { PageResponse, SystemUser, UserParams, BaseResponse } from "./types"
 
+interface PwdParams {
+    userId: string,
+    password: string
+}
 
 export default {
     systemUserListApi(params: UserParams) {
@@ -14,6 +18,14 @@ export default {
         return useRequest<BaseResponse>({
             url: `/system/user/${id}`,
             method: 'DELETE',
+        })
+    },
+
+    resetPwdApi(data: PwdParams) {
+        return useRequest<BaseResponse>({
+            url: `/system/user/resetPwd`,
+            method: 'PUT',
+            data,
         })
     }
 }
