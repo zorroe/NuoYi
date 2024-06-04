@@ -3,6 +3,7 @@ import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import IconsResolver from 'unplugin-icons/resolver'
+import { ElementPlus } from '@element-plus/icons-vue'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -36,8 +37,6 @@ export default defineNuxtConfig({
     plugins: [
       AutoImport({
         resolvers: [
-          ElementPlusResolver(),
-
           // Auto import icon components
           // 自动导入图标组件
           IconsResolver({
@@ -47,12 +46,7 @@ export default defineNuxtConfig({
       }),
       Components({
         resolvers: [
-          // Auto register icon components
-          // 自动注册图标组件
           IconsResolver(),
-          // Auto register Element Plus components
-          // 自动导入 Element Plus 组件
-          ElementPlusResolver(),
         ],
       }),
       Icons({
@@ -63,7 +57,6 @@ export default defineNuxtConfig({
   },
   elementPlus: {
     importStyle: 'scss',
-
   },
   modules: [
     '@unocss/nuxt',

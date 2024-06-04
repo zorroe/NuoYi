@@ -3,7 +3,7 @@ interface PageParamsBase {
     pageSize: number
 }
 
-interface BaseResponse {
+export interface BaseResponse {
     code: number
     msg: string
 }
@@ -50,7 +50,7 @@ export interface SystemUser {
     updateBy?: any;
     updateTime?: any;
     remark: string;
-    userId: number;
+    userId: string;
     deptId: number;
     userName: string;
     nickName: string;

@@ -1,5 +1,4 @@
 export function tansParams(params: any) {
-    console.log(params)
     const newParams = {} as any
     for (const propName of Object.keys(params)) {
         const value = params[propName];

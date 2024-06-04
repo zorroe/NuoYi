@@ -1,4 +1,4 @@
-import type { PageResponse, SystemUser, UserParams } from "./types"
+import type { PageResponse, SystemUser, UserParams, BaseResponse } from "./types"
 
 
 export default {
@@ -9,4 +9,11 @@ export default {
             params,
         })
     },
+
+    deleteUserApi(id: string) {
+        return useRequest<BaseResponse>({
+            url: `/system/user/${id}`,
+            method: 'DELETE',
+        })
+    }
 }
