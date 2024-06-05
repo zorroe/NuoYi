@@ -1,3 +1,11 @@
+<script setup lang="ts">
+definePageMeta({
+  title: '首页',
+  icon: 'i-material-symbols:home-outline-rounded',
+  hidden: false,
+})
+</script>
+
 <template>
   <div>
     <el-row :gutter="12">
@@ -6,7 +14,8 @@
         :sm="24"
         :md="12"
         :lg="12"
-        :xl="12">
+        :xl="12"
+      >
         <el-card shadow="hover">
           <template #header>
             <div class="card-header">
@@ -16,17 +25,19 @@
           <div>
             <el-text
               class="mx-1"
-              size="large">
+              size="large"
+            >
               RuoYi with Nuxt3
             </el-text>
           </div>
           <div class="mt-2">
             <NuxtLink
               to="https://github.com/zorroe"
-              target="_blank">
+              target="_blank"
+            >
               <el-button type="primary">
                 <template #icon>
-                  <div class="i-mdi:github"></div>
+                  <div class="i-mdi:github" />
                 </template>
                 GitHub
               </el-button>
@@ -39,7 +50,8 @@
         :sm="24"
         :md="12"
         :lg="12"
-        :xl="12">
+        :xl="12"
+      >
         <el-card shadow="hover">
           <template #header>
             <div class="card-header">
@@ -47,7 +59,9 @@
             </div>
           </template>
           <div>
-            <el-text size="large">前端技术</el-text>
+            <el-text size="large">
+              前端技术
+            </el-text>
           </div>
           <el-row>
             <el-col :span="12">
@@ -56,22 +70,25 @@
                   <el-link
                     href="https://nuxt.com/"
                     target="_blank"
-                    >Nuxt3</el-link
                   >
+                    Nuxt3
+                  </el-link>
                 </li>
                 <li>
                   <el-link
                     href="https://cn.vuejs.org/"
                     target="_blank"
-                    >Vue3</el-link
                   >
+                    Vue3
+                  </el-link>
                 </li>
                 <li>
                   <el-link
                     href="https://unocss.dev/"
                     target="_blank"
-                    >UnoCSS</el-link
                   >
+                    UnoCSS
+                  </el-link>
                 </li>
               </ul>
             </el-col>
@@ -81,22 +98,25 @@
                   <el-link
                     href="https://pinia.vuejs.org/zh/"
                     target="_blank"
-                    >Pinia</el-link
                   >
+                    Pinia
+                  </el-link>
                 </li>
                 <li>
                   <el-link
                     href="https://element-plus.org/zh-CN/"
                     target="_blank"
-                    >ElementPlus</el-link
                   >
+                    ElementPlus
+                  </el-link>
                 </li>
                 <li>
                   <el-link
                     href="https://sass-lang.com/"
                     target="_blank"
-                    >Sass</el-link
                   >
+                    Sass
+                  </el-link>
                 </li>
               </ul>
             </el-col>
@@ -106,13 +126,5 @@
     </el-row>
   </div>
 </template>
-
-<script setup lang="ts">
-definePageMeta({
-  title: '首页',
-  icon: 'i-material-symbols:home-outline-rounded',
-  hidden: false,
-})
-</script>
 
 <style scoped></style>

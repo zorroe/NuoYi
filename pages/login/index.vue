@@ -1,57 +1,11 @@
-<template>
-  <div class="lg:grid lg:min-h-screen lg:grid-cols-12">
-    <section class="relative flex h-32 items-end lg:col-span-5 lg:h-full xl:col-span-6">
-      <img alt=""
-        src="https://images.unsplash.com/photo-1617195737496-bc30194e3a19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
-        class="absolute inset-0 h-full w-full object-cover opacity-80" />
-    </section>
-    <main class="flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6">
-      <div class="max-w-xl lg:max-w-3xl">
-        <el-form :model="loginForm" ref="loginFormRef" label-position="right" :rules="formRules" style="width: 500px">
-          <el-form-item prop="username">
-            <el-input v-model="loginForm.username" placeholder="用户名" size="large">
-              <template #prefix>
-                <div class="i-material-symbols:account-circle w-1em h-1em"></div>
-              </template>
-            </el-input>
-          </el-form-item>
-          <el-form-item prop="password">
-            <el-input v-model="loginForm.password" type="password" placeholder="密码" size="large">
-              <template #prefix>
-                <div class="i-material-symbols:lock-outline w-1em h-1em"></div>
-              </template>
-            </el-input>
-          </el-form-item>
-          <el-form-item prop="code">
-            <div class="flex gap-4 w-full">
-              <el-input v-model="loginForm.code" size="large">
-                <template #prefix>
-                  <div class="i-material-symbols:code-blocks-outline-rounded w-1em h-1em"></div>
-                </template>
-              </el-input>
-              <el-image style="height: 40px" :src="codeImg" @click="loadCaptchaImage" />
-            </div>
-          </el-form-item>
-          <el-form-item>
-            <el-button type="primary" @click="handleLogin">登录</el-button>
-          </el-form-item>
-        </el-form>
-      </div>
-    </main>
-  </div>
-</template>
-
 <script setup lang="ts">
 import loginApi from '~/api/login'
-import { useUserStore } from '~/store/user'
-
-const userStore = useUserStore()
 
 definePageMeta({
   layout: 'login',
   icon: 'i-material-symbols:login-rounded',
   title: '登录',
-  hidden: true
+  hidden: true,
 })
 
 const loginForm = ref({
@@ -70,9 +24,10 @@ const formRules = ref({
   code: [{ required: true, message: '请输入验证码', trigger: 'blur' }],
 })
 
-const handleLogin = async () => {
+async function handleLogin() {
   const valid = await loginFormRef.value.validate()
-  if (!valid) return
+  if (!valid)
+    return
   const data = {
     ...loginForm.value,
     uuid: loginForm.value.uuid,
@@ -82,26 +37,74 @@ const handleLogin = async () => {
     await getInfo()
     ElMessage.success('登录成功')
     navigateTo('/')
-  } else {
+  }
+  else {
     loadCaptchaImage()
     loginFormRef.value.resetFields()
   }
 }
 
-const loadCaptchaImage = async () => {
+async function loadCaptchaImage() {
   const { img, uuid } = await loginApi.captchaApi()
-  codeImg.value = 'data:image/gif;base64,' + img
+  codeImg.value = `data:image/gif;base64,${img}`
   loginForm.value.uuid = uuid
 }
 
-const getInfo = async () => {
+async function getInfo() {
   const data = await loginApi.getInfoApi()
-  console.log(data)
+  return data
 }
 
 onMounted(() => {
   loadCaptchaImage()
 })
 </script>
+
+<template>
+  <div class="lg:grid lg:min-h-screen lg:grid-cols-12">
+    <section class="relative flex h-32 items-end lg:col-span-5 lg:h-full xl:col-span-6">
+      <img
+        alt=""
+        src="https://images.unsplash.com/photo-1617195737496-bc30194e3a19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+        class="absolute inset-0 h-full w-full object-cover opacity-80"
+      >
+    </section>
+    <main class="flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6">
+      <div class="max-w-xl lg:max-w-3xl">
+        <el-form ref="loginFormRef" :model="loginForm" label-position="right" :rules="formRules" style="width: 500px">
+          <el-form-item prop="username">
+            <el-input v-model="loginForm.username" placeholder="用户名" size="large">
+              <template #prefix>
+                <div class="i-material-symbols:account-circle w-1em h-1em" />
+              </template>
+            </el-input>
+          </el-form-item>
+          <el-form-item prop="password">
+            <el-input v-model="loginForm.password" type="password" placeholder="密码" size="large">
+              <template #prefix>
+                <div class="i-material-symbols:lock-outline w-1em h-1em" />
+              </template>
+            </el-input>
+          </el-form-item>
+          <el-form-item prop="code">
+            <div class="flex gap-4 w-full">
+              <el-input v-model="loginForm.code" size="large">
+                <template #prefix>
+                  <div class="i-material-symbols:code-blocks-outline-rounded w-1em h-1em" />
+                </template>
+              </el-input>
+              <el-image style="height: 40px" :src="codeImg" @click="loadCaptchaImage" />
+            </div>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="handleLogin">
+              登录
+            </el-button>
+          </el-form-item>
+        </el-form>
+      </div>
+    </main>
+  </div>
+</template>
 
 <style scoped></style>

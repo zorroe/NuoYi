@@ -1,4 +1,4 @@
-import type { CaptchaResponse, LoginResponse, InfoResponse, BaseResponse } from "./types";
+import type { BaseResponse, CaptchaResponse, InfoResponse, LoginResponse } from './types'
 
 export default {
   captchaApi() {
@@ -27,5 +27,5 @@ export default {
       url: '/logout',
       method: 'POST',
     })
-  }
+  },
 }

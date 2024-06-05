@@ -1,17 +1,17 @@
 interface BaseResponse {
-    code: number
-    msg: string
+  code: number
+  msg: string
 }
 
 interface CommonResponse extends BaseResponse {
-    data: any
+  data: any
 }
 
 export default {
-    getRouterApi() {
-        return useRequest<CommonResponse>({
-            url: '/getRouters',
-            method: 'GET',
-        })
-    }
+  getRouterApi() {
+    return useRequest<CommonResponse>({
+      url: '/getRouters',
+      method: 'GET',
+    })
+  },
 }

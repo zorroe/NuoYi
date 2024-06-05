@@ -1,17 +1,15 @@
 import Icons from 'unplugin-icons/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
-import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import IconsResolver from 'unplugin-icons/resolver'
-import { ElementPlus } from '@element-plus/icons-vue'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   ssr: false,
   runtimeConfig: {
     public: {
-      projectName: '管理系统'
-    }
+      projectName: '管理系统',
+    },
   },
   nitro: {
     devProxy: {
@@ -21,8 +19,8 @@ export default defineNuxtConfig({
   // 该配置用于服务端请求转发
   routeRules: {
     '/prod-api/**': {
-      proxy: process.env.BASE_URL + '/**',
-    }
+      proxy: `${process.env.BASE_URL}/**`,
+    },
   },
   devtools: { enabled: false },
   css: ['~/assets/css/global.css'],
@@ -53,7 +51,7 @@ export default defineNuxtConfig({
         autoInstall: true,
       }),
 
-    ]
+    ],
   },
   elementPlus: {
     importStyle: 'scss',
@@ -61,19 +59,17 @@ export default defineNuxtConfig({
   modules: [
     '@unocss/nuxt',
     '@element-plus/nuxt',
-    ['@vueuse/nuxt',
-      {
-        autoImports: []
-      }],
-    ['@pinia/nuxt',
-      {
-        autoImports: [
-          // 自动引入 `defineStore()`
-          'defineStore',
-        ],
-      }]
+    ['@vueuse/nuxt', {
+      autoImports: [],
+    }],
+    ['@pinia/nuxt', {
+      autoImports: [
+        // 自动引入 `defineStore()`
+        'defineStore',
+      ],
+    }],
   ],
   plugins: [
-    { src: '~/plugins/router.ts', mode: 'client' }
-  ]
+    { src: '~/plugins/router.ts', mode: 'client' },
+  ],
 })

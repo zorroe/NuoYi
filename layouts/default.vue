@@ -1,3 +1,5 @@
+<script setup lang="ts"></script>
+
 <template>
   <div class="w-screen h-screen flex">
     <SideMenu />
@@ -11,7 +13,5 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts"></script>
 
 <style scoped></style>

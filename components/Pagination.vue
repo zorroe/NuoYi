@@ -1,20 +1,3 @@
-<template>
-  <div
-    :class="{ hidden: hidden }"
-    class="mt-2 flex justify-end items-center">
-    <el-pagination
-      :background="background"
-      v-model:current-page="currentPage"
-      v-model:page-size="pageSize"
-      :layout="layout"
-      :page-sizes="pageSizes"
-      :pager-count="pagerCount"
-      :total="total"
-      @size-change="handleSizeChange"
-      @current-change="handleCurrentChange" />
-  </div>
-</template>
-
 <script setup lang="ts">
 const props = defineProps({
   total: {
@@ -58,7 +41,7 @@ const props = defineProps({
   },
 })
 
-const emit = defineEmits()
+const emit = defineEmits(['pagination', 'update:page', 'update:limit'])
 const currentPage = computed({
   get() {
     return props.page
@@ -91,5 +74,24 @@ function handleCurrentChange(val: number) {
   }
 }
 </script>
+
+<template>
+  <div
+    :class="{ hidden }"
+    class="mt-2 flex justify-end items-center"
+  >
+    <el-pagination
+      v-model:current-page="currentPage"
+      v-model:page-size="pageSize"
+      :background="background"
+      :layout="layout"
+      :page-sizes="pageSizes"
+      :pager-count="pagerCount"
+      :total="total"
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+    />
+  </div>
+</template>
 
 <style scoped></style>
