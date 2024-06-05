@@ -6,6 +6,7 @@ export default antfu({
   rules: {
     'unused-imports/no-unused-vars': 0,
     'node/prefer-global/process': 0,
+    'no-console': 1,
   },
   formatters: {
     css: true,

@@ -10,8 +10,9 @@ import {
   Search,
   Upload,
 } from '@element-plus/icons-vue'
-import type { DeptTree, SystemUser, UserParams } from '~/api/types'
+import type { DeptTree, Post, Role, SystemUser, UserParams } from '~/api/types'
 import userApi from '~/api/user'
+import systemApi from '~/api/system'
 import { parseTime } from '~/utils/nuoyi'
 
 definePageMeta({
@@ -37,25 +38,34 @@ const searchParams = ref<UserParams>({
   deptId: undefined,
 })
 
+const form = ref<any>({
+  status: '0',
+})
+
+const rules = ref<any>({
+  userName: [{ required: true, message: '用户名称不能为空', trigger: 'blur' }, { min: 2, max: 20, message: '用户名称长度必须介于 2 和 20 之间', trigger: 'blur' }],
+  nickName: [{ required: true, message: '用户昵称不能为空', trigger: 'blur' }],
+  password: [{ required: true, message: '用户密码不能为空', trigger: 'blur' }, { min: 5, max: 20, message: '用户密码长度必须介于 5 和 20 之间', trigger: 'blur' }, { pattern: /^[^<>"'|\\]+$/, message: '不能包含非法字符：< > " \' \\\ |', trigger: 'blur' }],
+  email: [{ type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change'] }],
+  phonenumber: [{ pattern: /^1[3-9]\d{9}$/, message: '请输入正确的手机号码', trigger: 'blur' }],
+})
+
 const searchFormRef = ref<any>()
+const userRef = ref<any>()
 const createTime = ref<any>([])
 
 const loading = ref(false)
 const total = ref<number>(1)
 const multipleSelection = ref<SystemUser[]>([])
 
-const userStatusOptions = ref([
-  {
-    label: '启用',
-    value: '1',
-  },
-  {
-    label: '禁用',
-    value: '0',
-  },
-])
+const userStatusOptions = ref<any>([])
+const userSexOptions = ref<any>([])
+const dialogTitle = ref<string>('新增用户')
+const dialogVisible = ref<boolean>(false)
 
 const tableData = ref<SystemUser[]>([])
+const posts = ref<Post[]>([])
+const roles = ref<Role[]>([])
 
 function handleNodeClick(data: DeptTree) {
   searchParams.value.deptId = data.id
@@ -156,9 +166,60 @@ function handleReset() {
   getList()
 }
 
+function handleAddUser() {
+  dialogTitle.value = '新增用户'
+  dialogVisible.value = true
+}
+
+async function getNormalDisableDict() {
+  const { data } = await systemApi.normalDiasbleApi()
+  userStatusOptions.value = data
+}
+
+async function getUserSexDict() {
+  const { data } = await systemApi.userSexApi()
+  userSexOptions.value = data
+}
+
+async function getPostsRoles() {
+  const { posts: p, roles: r } = await systemApi.userApi()
+  posts.value = p
+  roles.value = r
+}
+
+function handleClose() {
+  dialogVisible.value = false
+  userRef.value.resetFields()
+  handleReset()
+}
+
+function handleConfirm() {
+  userRef.value.validate(async (valid: boolean) => {
+    if (valid) {
+      if (dialogTitle.value === '新增用户') {
+        const { code } = await userApi.addUserApi(form.value)
+        if (code === 200) {
+          ElMessage.success('新增成功')
+          handleClose()
+        }
+      }
+      else {
+        const { code } = await userApi.updateUserApi(form.value)
+        if (code === 200) {
+          ElMessage.success('更新成功')
+          handleClose()
+        }
+      }
+    }
+  })
+}
+
 onMounted(() => {
   handleReset()
   getDept()
+  getNormalDisableDict()
+  getUserSexDict()
+  getPostsRoles()
 })
 </script>
 
@@ -166,7 +227,7 @@ onMounted(() => {
   <el-row :gutter="12">
     <el-col :xs="24" :sm="24" :md="24" :lg="4" :xl="4">
       <el-scrollbar>
-        <el-tree :data="deptTree" @node-click="handleNodeClick" />
+        <el-tree :data="deptTree" node-key="id" highlight-current @node-click="handleNodeClick" />
       </el-scrollbar>
     </el-col>
     <el-col :xs="24" :sm="24" :md="24" :lg="20" :xl="20">
@@ -182,8 +243,8 @@ onMounted(() => {
             <el-form-item label="状态" prop="status">
               <el-select v-model="searchParams.status" placeholder="用户状态" style="width: 220px">
                 <el-option
-                  v-for="item in userStatusOptions" :key="item.value" :label="item.label"
-                  :value="item.value"
+                  v-for="item in userStatusOptions" :key="item.dictValue" :label="item.dictLabel"
+                  :value="item.dictValue"
                 />
               </el-select>
             </el-form-item>
@@ -207,7 +268,7 @@ onMounted(() => {
         <el-col :span="24">
           <el-row>
             <el-col :xs="24" :sm="24" :md="24" :lg="16" :xl="16">
-              <el-button :icon="Plus" plain type="primary">
+              <el-button :icon="Plus" plain type="primary" @click="handleAddUser">
                 新增
               </el-button>
               <el-button
@@ -286,6 +347,133 @@ onMounted(() => {
       </el-row>
     </el-col>
   </el-row>
+  <el-dialog
+    v-model="dialogVisible"
+    :title="dialogTitle"
+    width="700"
+    :before-close="handleClose"
+  >
+    <template #default>
+      <el-form ref="userRef" :model="form" :rules="rules" label-width="80px">
+        <el-row :gutter="12">
+          <el-col :span="12">
+            <el-form-item label="用户昵称" prop="nickName">
+              <el-input v-model="form.nickName" placeholder="请输入用户昵称" maxlength="30" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="归属部门" prop="deptId">
+              <el-tree-select
+                v-model="form.deptId"
+                :data="deptTree"
+                :props="{ value: 'id', label: 'label', children: 'children' }"
+                value-key="id"
+                placeholder="请选择归属部门"
+                check-strictly
+              />
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row :gutter="12">
+          <el-col :span="12">
+            <el-form-item label="手机号码" prop="phonenumber">
+              <el-input v-model="form.phonenumber" placeholder="请输入手机号码" maxlength="11" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="邮箱" prop="email">
+              <el-input v-model="form.email" placeholder="请输入邮箱" maxlength="50" />
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row :gutter="12">
+          <el-col :span="12">
+            <el-form-item v-if="form.userId === undefined" label="用户名称" prop="userName">
+              <el-input v-model="form.userName" placeholder="请输入用户名称" maxlength="30" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item v-if="form.userId === undefined" label="用户密码" prop="password">
+              <el-input v-model="form.password" placeholder="请输入用户密码" type="password" maxlength="20" show-password />
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row :gutter="12">
+          <el-col :span="12">
+            <el-form-item label="用户性别">
+              <el-select v-model="form.sex" placeholder="请选择">
+                <el-option
+                  v-for="dict in userSexOptions"
+                  :key="dict.dictValue"
+                  :label="dict.dictLabel"
+                  :value="dict.dictValue"
+                />
+              </el-select>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="状态">
+              <el-radio-group v-model="form.status">
+                <el-radio
+                  v-for="dict in userStatusOptions"
+                  :key="dict.dictValue"
+                  :label="dict.dictLabel"
+                  :value="dict.dictValue"
+                >
+                  {{ dict.dictLabel }}
+                </el-radio>
+              </el-radio-group>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row :gutter="12">
+          <el-col :span="12">
+            <el-form-item label="岗位">
+              <el-select v-model="form.postIds" multiple placeholder="请选择">
+                <el-option
+                  v-for="item in posts"
+                  :key="item.postId"
+                  :label="item.postName"
+                  :value="item.postId"
+                  :disabled="item.status === 1"
+                />
+              </el-select>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="角色">
+              <el-select v-model="form.roleIds" multiple placeholder="请选择">
+                <el-option
+                  v-for="item in roles"
+                  :key="item.roleId"
+                  :label="item.roleName"
+                  :value="item.roleId"
+                  :disabled="item.status === 1"
+                />
+              </el-select>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row :gutter="12">
+          <el-col :span="24">
+            <el-form-item label="备注">
+              <el-input v-model="form.remark" type="textarea" placeholder="请输入内容" />
+            </el-form-item>
+          </el-col>
+        </el-row>
+      </el-form>
+    </template>
+    <template #footer>
+      <div class="dialog-footer">
+        <el-button @click="handleClose">
+          取消
+        </el-button>
+        <el-button type="primary" @click="handleConfirm">
+          确定
+        </el-button>
+      </div>
+    </template>
+  </el-dialog>
 </template>
 
 <style scoped></style>

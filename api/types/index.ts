@@ -96,3 +96,44 @@ export interface DeptTree {
   label: string
   children?: DeptTree[]
 }
+
+export interface Role {
+  createBy?: any
+  createTime: string
+  updateBy?: any
+  updateTime?: any
+  remark?: any
+  roleId: number
+  roleName: string
+  roleKey: string
+  roleSort: number
+  dataScope: string
+  menuCheckStrictly: boolean
+  deptCheckStrictly: boolean
+  status: number
+  delFlag: string
+  flag: boolean
+  menuIds?: any
+  deptIds?: any
+  permissions?: any
+  admin: boolean
+}
+
+export interface Post {
+  createBy: string
+  createTime: string
+  updateBy?: any
+  updateTime?: any
+  remark: string
+  postId: number
+  postCode: string
+  postName: string
+  postSort: number
+  status: number
+  flag: boolean
+}
+
+export interface SystemUserResponse extends BaseResponse {
+  roles: Role[]
+  posts: Post[]
+}

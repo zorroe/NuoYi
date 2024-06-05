@@ -35,4 +35,20 @@ export default {
       method: 'GET',
     })
   },
+
+  addUserApi(data: any) {
+    return useRequest<BaseResponse>({
+      url: '/system/user',
+      method: 'POST',
+      data,
+    })
+  },
+
+  updateUserApi(data: any) {
+    return useRequest<BaseResponse>({
+      url: '/system/user',
+      method: 'PUT',
+      data,
+    })
+  },
 }
