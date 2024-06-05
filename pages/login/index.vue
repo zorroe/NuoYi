@@ -65,7 +65,7 @@ onMounted(() => {
     <section class="relative flex h-32 items-end lg:col-span-5 lg:h-full xl:col-span-6">
       <img
         alt=""
-        src="https://images.unsplash.com/photo-1617195737496-bc30194e3a19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+        src="https://pixabay.com/get/g1b5bd301a0b95d00537c7e7d1bf98e0eac75c51cff787012fd3871eec3e4aa7e66c88d3166f441014d2e225be2767aa095c0fd010da78272883035d05f64b708_1280.jpg"
         class="absolute inset-0 h-full w-full object-cover opacity-80"
       >
     </section>
