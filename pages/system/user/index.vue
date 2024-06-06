@@ -6,7 +6,7 @@ import { parseTime } from '~/utils/nuoyi'
 
 definePageMeta({
   title: '用户管理',
-  icon: 'i-material-symbols:person-outline-rounded',
+  icon: 'i-mdi:account',
 })
 
 const columns = ref([
@@ -248,12 +248,12 @@ onMounted(() => {
               <el-button v-throttle type="primary" @click="getList">
                 搜索
                 <template #icon>
-                  <i-ep-search />
+                  <i-mdi-search />
                 </template>
               </el-button>
               <el-button v-throttle @click="handleReset()">
                 <template #icon>
-                  <i-ep-refresh />
+                  <i-mdi-refresh />
                 </template>
                 重置
               </el-button>
@@ -265,7 +265,7 @@ onMounted(() => {
             <el-col :xs="24" :sm="24" :md="24" :lg="16" :xl="16">
               <el-button plain type="primary" @click="handleAddUser">
                 <template #icon>
-                  <i-ep-plus />
+                  <i-mdi-plus />
                 </template>
                 新增
               </el-button>
@@ -274,19 +274,19 @@ onMounted(() => {
                 @click="handleDelete"
               >
                 <template #icon>
-                  <i-ep-delete />
+                  <i-mdi-delete />
                 </template>
                 删除
               </el-button>
               <el-button plain type="info">
                 <template #icon>
-                  <i-ep-upload />
+                  <i-mdi-upload />
                 </template>
                 导入
               </el-button>
               <el-button plain type="warning">
                 <template #icon>
-                  <i-ep-download />
+                  <i-mdi-download />
                 </template>
                 导出
               </el-button>
@@ -331,28 +331,28 @@ onMounted(() => {
                   <el-tooltip v-if="scope.row.userId !== 1" content="修改" placement="top">
                     <el-button circle size="small">
                       <template #icon>
-                        <i-ep-edit />
+                        <i-mdi-edit />
                       </template>
                     </el-button>
                   </el-tooltip>
                   <el-tooltip v-if="scope.row.userId !== 1" content="删除" placement="top">
                     <el-button circle size="small" @click="handleDeleteOne(scope.row)">
                       <template #icon>
-                        <i-ep-delete />
+                        <i-mdi-delete />
                       </template>
                     </el-button>
                   </el-tooltip>
                   <el-tooltip v-if="scope.row.userId !== 1" content="重置密码" placement="top">
                     <el-button circle size="small" @click="handleResetPwd(scope.row)">
                       <template #icon>
-                        <i-ep-key />
+                        <i-mdi-key />
                       </template>
                     </el-button>
                   </el-tooltip>
                   <el-tooltip v-if="scope.row.userId !== 1" content="分配角色" placement="top">
                     <el-button circle size="small">
                       <template #icon>
-                        <i-ep-rank />
+                        <i-mdi-arrow-all />
                       </template>
                     </el-button>
                   </el-tooltip>

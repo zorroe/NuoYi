@@ -1,7 +1,7 @@
 <script setup lang="ts">
 definePageMeta({
   layout: 'login',
-  icon: 'i-material-symbols:bookmark-outline-rounded',
+  icon: 'i-mdi:bookmark',
   title: '注册',
   hidden: true,
 })

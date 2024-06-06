@@ -3,7 +3,7 @@ import loginApi from '~/api/login'
 
 definePageMeta({
   layout: 'login',
-  icon: 'i-material-symbols:login-rounded',
+  icon: 'i-mdi:login',
   title: '登录',
   hidden: true,
 })
@@ -75,14 +75,14 @@ onMounted(() => {
           <el-form-item prop="username">
             <el-input v-model="loginForm.username" placeholder="用户名" size="large">
               <template #prefix>
-                <div class="i-material-symbols:account-circle w-1em h-1em" />
+                <div class="i-mdi:account w-1em h-1em" />
               </template>
             </el-input>
           </el-form-item>
           <el-form-item prop="password">
             <el-input v-model="loginForm.password" type="password" placeholder="密码" size="large">
               <template #prefix>
-                <div class="i-material-symbols:lock-outline w-1em h-1em" />
+                <div class="i-mdi:lock w-1em h-1em" />
               </template>
             </el-input>
           </el-form-item>
@@ -90,7 +90,7 @@ onMounted(() => {
             <div class="flex gap-4 w-full">
               <el-input v-model="loginForm.code" size="large">
                 <template #prefix>
-                  <div class="i-material-symbols:code-blocks-outline-rounded w-1em h-1em" />
+                  <div class="i-mdi:code w-1em h-1em" />
                 </template>
               </el-input>
               <el-image style="height: 40px" :src="codeImg" @click="loadCaptchaImage" />

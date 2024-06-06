@@ -27,7 +27,7 @@ const breadcrumbs = computed(() => {
       @click="settingStore.toggleCollapse()"
     >
       <div
-        class="i-material-symbols:right-panel-close-outline-rounded w-1em h-1em"
+        class="i-mdi-arrow-right-bold w-1em h-1em"
       />
     </div>
     <div
@@ -36,7 +36,7 @@ const breadcrumbs = computed(() => {
       @click="settingStore.toggleCollapse()"
     >
       <div
-        class="i-material-symbols:right-panel-open-outline w-1em h-1em"
+        class="i-mdi-arrow-left-bold w-1em h-1em"
       />
     </div>
     <el-breadcrumb separator="/">

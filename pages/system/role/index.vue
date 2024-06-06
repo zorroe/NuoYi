@@ -1,7 +1,7 @@
 <script setup lang="ts">
 definePageMeta({
   title: '角色管理',
-  icon: 'i-material-symbols:patient-list-outline-rounded',
+  icon: 'i-mdi:account-group',
 })
 </script>
 

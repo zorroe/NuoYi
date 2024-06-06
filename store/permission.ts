@@ -25,7 +25,7 @@ export const usePermissionStore = defineStore(
       getAuthRoute() {
         return new Promise((resolve, reject) => {
           menuApi.getRouterApi().then(() => {
-            const data = ['index', 'system', 'system-dept', 'system-menu', 'system-user', 'system-user-add', 'system-user-edit']
+            const data = ['index', 'system', 'system-dept', 'system-menu', 'system-role', 'system-user', 'system-user-add', 'system-user-edit']
             resolve(data)
           }).catch((err) => {
             reject(err)

@@ -45,7 +45,7 @@ export default defineNuxtConfig({
       Components({
         resolvers: [
           IconsResolver({
-            enabledCollections: ['ep', 'mdi'],
+            enabledCollections: ['mdi'],
           }),
         ],
       }),

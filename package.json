@@ -18,12 +18,8 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.20.0",
-    "@element-plus/icons-vue": "^2.3.1",
     "@element-plus/nuxt": "^1.0.9",
-    "@iconify-json/ep": "^1.1.15",
-    "@iconify-json/material-symbols": "^1.1.79",
     "@iconify-json/mdi": "^1.1.66",
-    "@pinia-plugin-persistedstate/nuxt": "^1.2.0",
     "@pinia/nuxt": "^0.5.1",
     "@types/js-cookie": "^3.0.6",
     "@types/nprogress": "^0.2.3",

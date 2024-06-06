@@ -7,17 +7,15 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    IEpDelete: typeof import('~icons/ep/delete')['default']
-    IEpDownload: typeof import('~icons/ep/download')['default']
-    IEpEdit: typeof import('~icons/ep/edit')['default']
-    IEpKey: typeof import('~icons/ep/key')['default']
-    IEpPlus: typeof import('~icons/ep/plus')['default']
-    IEpRank: typeof import('~icons/ep/rank')['default']
-    IEpRefresh: typeof import('~icons/ep/refresh')['default']
-    IEpReset: typeof import('~icons/ep/reset')['default']
-    IEpSearch: typeof import('~icons/ep/search')['default']
-    IEpUpload: typeof import('~icons/ep/upload')['default']
-    IMdiAbTesting: typeof import('~icons/mdi/ab-testing')['default']
+    IMdiArrowAll: typeof import('~icons/mdi/arrow-all')['default']
+    IMdiDelete: typeof import('~icons/mdi/delete')['default']
+    IMdiDownload: typeof import('~icons/mdi/download')['default']
+    IMdiEdit: typeof import('~icons/mdi/edit')['default']
+    IMdiKey: typeof import('~icons/mdi/key')['default']
+    IMdiPlus: typeof import('~icons/mdi/plus')['default']
+    IMdiRefresh: typeof import('~icons/mdi/refresh')['default']
+    IMdiSearch: typeof import('~icons/mdi/search')['default']
+    IMdiUpload: typeof import('~icons/mdi/upload')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }

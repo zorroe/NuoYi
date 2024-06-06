@@ -1,7 +1,7 @@
 <script setup lang="ts">
 definePageMeta({
   title: '菜单管理',
-  icon: 'i-material-symbols:menu-open-rounded',
+  icon: 'i-mdi-menu',
 })
 </script>
 

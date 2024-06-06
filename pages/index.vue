@@ -1,7 +1,7 @@
 <script setup lang="ts">
 definePageMeta({
   title: '首页',
-  icon: 'i-material-symbols:home-outline-rounded',
+  icon: 'i-mdi:home',
   hidden: false,
 })
 </script>

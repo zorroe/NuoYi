@@ -1,7 +1,7 @@
 <script setup lang="ts">
 definePageMeta({
   title: '部门管理',
-  icon: 'i-material-symbols:account-tree-outline-rounded',
+  icon: 'i-mdi:office-building',
 })
 </script>
 
