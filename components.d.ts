@@ -7,6 +7,17 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    IEpDelete: typeof import('~icons/ep/delete')['default']
+    IEpDownload: typeof import('~icons/ep/download')['default']
+    IEpEdit: typeof import('~icons/ep/edit')['default']
+    IEpKey: typeof import('~icons/ep/key')['default']
+    IEpPlus: typeof import('~icons/ep/plus')['default']
+    IEpRank: typeof import('~icons/ep/rank')['default']
+    IEpRefresh: typeof import('~icons/ep/refresh')['default']
+    IEpReset: typeof import('~icons/ep/reset')['default']
+    IEpSearch: typeof import('~icons/ep/search')['default']
+    IEpUpload: typeof import('~icons/ep/upload')['default']
+    IMdiAbTesting: typeof import('~icons/mdi/ab-testing')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }

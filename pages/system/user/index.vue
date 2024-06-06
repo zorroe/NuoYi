@@ -1,15 +1,4 @@
 <script setup lang="ts">
-import {
-  Delete,
-  Download,
-  Edit,
-  Plus,
-  Rank,
-  Refresh,
-  RefreshRight,
-  Search,
-  Upload,
-} from '@element-plus/icons-vue'
 import type { DeptTree, Post, Role, SystemUser, UserParams } from '~/api/types'
 import userApi from '~/api/user'
 import systemApi from '~/api/system'
@@ -256,10 +245,16 @@ onMounted(() => {
               />
             </el-form-item>
             <el-form-item>
-              <el-button v-throttle :icon="Search" type="primary" @click="getList">
+              <el-button v-throttle type="primary" @click="getList">
                 搜索
+                <template #icon>
+                  <i-ep-search />
+                </template>
               </el-button>
-              <el-button v-throttle :icon="Refresh" @click="handleReset()">
+              <el-button v-throttle @click="handleReset()">
+                <template #icon>
+                  <i-ep-refresh />
+                </template>
                 重置
               </el-button>
             </el-form-item>
@@ -268,19 +263,31 @@ onMounted(() => {
         <el-col :span="24">
           <el-row>
             <el-col :xs="24" :sm="24" :md="24" :lg="16" :xl="16">
-              <el-button :icon="Plus" plain type="primary" @click="handleAddUser">
+              <el-button plain type="primary" @click="handleAddUser">
+                <template #icon>
+                  <i-ep-plus />
+                </template>
                 新增
               </el-button>
               <el-button
-                :icon="Delete" plain type="danger" :disabled="multipleSelection.length === 0"
+                plain type="danger" :disabled="multipleSelection.length === 0"
                 @click="handleDelete"
               >
+                <template #icon>
+                  <i-ep-delete />
+                </template>
                 删除
               </el-button>
-              <el-button :icon="Upload" plain type="info">
+              <el-button plain type="info">
+                <template #icon>
+                  <i-ep-upload />
+                </template>
                 导入
               </el-button>
-              <el-button :icon="Download" plain type="warning">
+              <el-button plain type="warning">
+                <template #icon>
+                  <i-ep-download />
+                </template>
                 导出
               </el-button>
             </el-col>
@@ -322,16 +329,32 @@ onMounted(() => {
               <template #default="scope">
                 <div class="flex items-center justify-center">
                   <el-tooltip v-if="scope.row.userId !== 1" content="修改" placement="top">
-                    <el-button circle :icon="Edit" size="small" />
+                    <el-button circle size="small">
+                      <template #icon>
+                        <i-ep-edit />
+                      </template>
+                    </el-button>
                   </el-tooltip>
                   <el-tooltip v-if="scope.row.userId !== 1" content="删除" placement="top">
-                    <el-button circle :icon="Delete" size="small" @click="handleDeleteOne(scope.row)" />
+                    <el-button circle size="small" @click="handleDeleteOne(scope.row)">
+                      <template #icon>
+                        <i-ep-delete />
+                      </template>
+                    </el-button>
                   </el-tooltip>
                   <el-tooltip v-if="scope.row.userId !== 1" content="重置密码" placement="top">
-                    <el-button circle :icon="RefreshRight" size="small" @click="handleResetPwd(scope.row)" />
+                    <el-button circle size="small" @click="handleResetPwd(scope.row)">
+                      <template #icon>
+                        <i-ep-key />
+                      </template>
+                    </el-button>
                   </el-tooltip>
                   <el-tooltip v-if="scope.row.userId !== 1" content="分配角色" placement="top">
-                    <el-button circle :icon="Rank" size="small" />
+                    <el-button circle size="small">
+                      <template #icon>
+                        <i-ep-rank />
+                      </template>
+                    </el-button>
                   </el-tooltip>
                 </div>
               </template>
