@@ -1,4 +1,4 @@
-import type { BaseResponse, CommonResponse, DeptTree, PageResponse, SystemUser, UserParams } from './types'
+import type { BaseResponse, CommonResponse, DeptTree, PageResponse, SystemUser, SystemUserMore, UserParams } from './types'
 
 interface PwdParams {
   userId: string
@@ -11,6 +11,13 @@ export default {
       url: '/system/user/list',
       method: 'GET',
       params,
+    })
+  },
+
+  getUserApi(id: string) {
+    return useRequest<SystemUserMore>({
+      url: `/system/user/${id}`,
+      method: 'GET',
     })
   },
 

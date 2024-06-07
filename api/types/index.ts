@@ -71,6 +71,13 @@ export interface SystemUser {
   admin: boolean
 }
 
+export interface SystemUserMore extends CommonResponse<SystemUser> {
+  postIds: string[]
+  posts: Post[]
+  roleIds: string[]
+  roles: Role[]
+}
+
 interface Dept {
   createBy?: any
   createTime?: any

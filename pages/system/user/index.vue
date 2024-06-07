@@ -4,6 +4,8 @@ import userApi from '~/api/user'
 import systemApi from '~/api/system'
 import { parseTime } from '~/utils/nuoyi'
 
+// TODO 分配角色功能
+
 definePageMeta({
   title: '用户管理',
   icon: 'i-mdi:account',
@@ -203,6 +205,21 @@ function handleConfirm() {
   })
 }
 
+async function handleUpdateOne(row: SystemUser) {
+  await getUserInfo(row.userId)
+  dialogTitle.value = '修改用户'
+  dialogVisible.value = true
+}
+
+async function getUserInfo(userId: string) {
+  const { data, roles: r, posts: p, roleIds: rs, postIds: ps } = await userApi.getUserApi(userId)
+  posts.value = p
+  roles.value = r
+  form.value = data
+  form.value.roleIds = rs
+  form.value.postIds = ps
+}
+
 onMounted(() => {
   handleReset()
   getDept()
@@ -329,7 +346,7 @@ onMounted(() => {
               <template #default="scope">
                 <div class="flex items-center justify-center">
                   <el-tooltip v-if="scope.row.userId !== 1" content="修改" placement="top">
-                    <el-button circle size="small">
+                    <el-button circle size="small" @click="handleUpdateOne(scope.row)">
                       <template #icon>
                         <i-mdi-edit />
                       </template>
