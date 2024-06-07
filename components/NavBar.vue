@@ -31,20 +31,20 @@ function handleCommand(command: string) {
   <div class="h-12 bg-gray-200 flex items-center px-2 cursor-default gap-2">
     <div
       v-if="settingStore.sideMenuCollapse"
-      class="p-2 content-center hover:bg-gray-300 rounded-md"
+      class="p-1.5 content-center hover:bg-gray-300 rounded-md"
       @click="settingStore.toggleCollapse()"
     >
       <div
-        class="i-mdi:arrow-expand-right w-1em h-1em"
+        class="i-mdi:menu-close w-1.2em h-1.2em"
       />
     </div>
     <div
       v-else
-      class="p-2 content-center hover:bg-gray-300 rounded-md"
+      class="p-1.5 content-center hover:bg-gray-300 rounded-md"
       @click="settingStore.toggleCollapse()"
     >
       <div
-        class="i-mdi:arrow-expand-left w-1em h-1em"
+        class="i-mdi:menu-open w-1.2em h-1.2em"
       />
     </div>
     <el-breadcrumb separator="/">

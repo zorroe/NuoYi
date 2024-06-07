@@ -62,6 +62,7 @@ export const useUserStore = defineStore(
             this.permissions = []
             removeToken()
             navigateTo('/login')
+            ElMessage.success('退出登录成功')
             resolve(true)
           }).catch((error) => {
             reject(error)
