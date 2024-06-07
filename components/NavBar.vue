@@ -21,7 +21,6 @@ const breadcrumbs = computed(() => {
 })
 
 function handleCommand(command: string) {
-  console.log(command)
   if (command === 'logout') {
     useUserStore().logout()
   }
