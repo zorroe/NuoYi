@@ -12,6 +12,7 @@ declare module 'vue' {
     IMdiDownload: typeof import('~icons/mdi/download')['default']
     IMdiEdit: typeof import('~icons/mdi/edit')['default']
     IMdiKey: typeof import('~icons/mdi/key')['default']
+    IMdiLogout: typeof import('~icons/mdi/logout')['default']
     IMdiPlus: typeof import('~icons/mdi/plus')['default']
     IMdiRefresh: typeof import('~icons/mdi/refresh')['default']
     IMdiSearch: typeof import('~icons/mdi/search')['default']

@@ -180,7 +180,9 @@ async function getPostsRoles() {
 
 function handleClose() {
   dialogVisible.value = false
-  userRef.value.resetFields()
+  form.value = {
+    status: '0',
+  }
   handleReset()
 }
 

@@ -61,6 +61,7 @@ export const useUserStore = defineStore(
             this.roles = []
             this.permissions = []
             removeToken()
+            navigateTo('/login')
             resolve(true)
           }).catch((error) => {
             reject(error)
