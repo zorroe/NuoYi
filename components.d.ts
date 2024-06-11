@@ -7,12 +7,16 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    IMdiAccount: typeof import('~icons/mdi/account')['default']
     IMdiArrowAll: typeof import('~icons/mdi/arrow-all')['default']
     IMdiDelete: typeof import('~icons/mdi/delete')['default']
     IMdiDownload: typeof import('~icons/mdi/download')['default']
     IMdiEdit: typeof import('~icons/mdi/edit')['default']
+    IMdiEye: typeof import('~icons/mdi/eye')['default']
     IMdiKey: typeof import('~icons/mdi/key')['default']
     IMdiLogout: typeof import('~icons/mdi/logout')['default']
+    IMdiPencil: typeof import('~icons/mdi/pencil')['default']
+    IMdiPerson: typeof import('~icons/mdi/person')['default']
     IMdiPlus: typeof import('~icons/mdi/plus')['default']
     IMdiRefresh: typeof import('~icons/mdi/refresh')['default']
     IMdiSearch: typeof import('~icons/mdi/search')['default']

@@ -44,6 +44,25 @@ export interface UserParams extends PageParamsBase {
   }
 }
 
+export interface RoleParams extends PageParamsBase {
+  roleName?: string
+  roleKey?: string
+  status?: string | number
+  params?: {
+    beginTime?: string
+    endTime?: string
+  }
+}
+
+export interface DeptParams extends PageParamsBase {
+  deptName?: string
+  status?: string | number
+  params?: {
+    beginTime?: string
+    endTime?: string
+  }
+}
+
 export interface SystemUser {
   createBy: string
   createTime: string
