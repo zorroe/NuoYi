@@ -5,12 +5,5 @@ export default defineConfig({
   presets: [
     presetUno(),
     presetIcons(),
-    presetWebFonts({
-      provider: 'google',
-      fonts: {
-        sans: ['Roboto', 'Noto Sans SC'],
-        mono: ['Fira Code', 'Fira Mono:400,700'],
-      },
-    }),
   ],
 })
