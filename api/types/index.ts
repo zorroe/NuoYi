@@ -163,3 +163,8 @@ export interface SystemUserResponse extends BaseResponse {
   roles: Role[]
   posts: Post[]
 }
+
+export interface DeptListParams {
+  deptName?: string
+  status?: string | number
+}
