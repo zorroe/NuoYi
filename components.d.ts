@@ -7,14 +7,6 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    IEpElementPlus: typeof import('~icons/ep/element-plus')['default']
-    ILogosElement: typeof import('~icons/logos/element')['default']
-    ILogosNuxt: typeof import('~icons/logos/nuxt')['default']
-    ILogosNuxtIcon: typeof import('~icons/logos/nuxt-icon')['default']
-    ILogosPinia: typeof import('~icons/logos/pinia')['default']
-    ILogosSass: typeof import('~icons/logos/sass')['default']
-    ILogosUnocss: typeof import('~icons/logos/unocss')['default']
-    ILogosVue: typeof import('~icons/logos/vue')['default']
     IMdiAccount: typeof import('~icons/mdi/account')['default']
     IMdiArrowAll: typeof import('~icons/mdi/arrow-all')['default']
     IMdiDelete: typeof import('~icons/mdi/delete')['default']
@@ -24,15 +16,11 @@ declare module 'vue' {
     IMdiKey: typeof import('~icons/mdi/key')['default']
     IMdiLogout: typeof import('~icons/mdi/logout')['default']
     IMdiMenuSwap: typeof import('~icons/mdi/menu-swap')['default']
-    IMdiNuxt: typeof import('~icons/mdi/nuxt')['default']
     IMdiPencil: typeof import('~icons/mdi/pencil')['default']
-    IMdiPerson: typeof import('~icons/mdi/person')['default']
     IMdiPlus: typeof import('~icons/mdi/plus')['default']
     IMdiRefresh: typeof import('~icons/mdi/refresh')['default']
-    IMdiSass: typeof import('~icons/mdi/sass')['default']
     IMdiSearch: typeof import('~icons/mdi/search')['default']
     IMdiUpload: typeof import('~icons/mdi/upload')['default']
-    IMdiVuejs: typeof import('~icons/mdi/vuejs')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }
