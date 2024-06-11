@@ -16,4 +16,11 @@ export default {
       data,
     })
   },
+
+  deleteSystemRoleApi(id: string) {
+    return useRequest<BaseResponse>({
+      url: `/system/role/${id}`,
+      method: 'DELETE',
+    })
+  },
 }

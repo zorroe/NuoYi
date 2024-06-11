@@ -45,7 +45,30 @@ function handleReset() {
 }
 
 function handleDelete() {
-
+  const ids = multipleSelection.value.map((item: any) => item.roleId)
+  if (ids.length === 0) {
+    ElMessage.warning('请选择需要删除的角色')
+    return
+  }
+  ElMessageBox.confirm(
+      `是否删除选中的${ids.length}个角色`,
+      '确认',
+      {
+        confirmButtonText: '确认',
+        cancelButtonText: '取消',
+        type: 'warning',
+      },
+  ).then(async () => {
+    const { code, msg } = await roleApi.deleteSystemRoleApi(ids.join(','))
+    if (code === 200) {
+      ElMessage.success('删除成功')
+    }
+    else {
+      ElMessage.error(msg)
+    }
+  }).finally(() => {
+    getList()
+  })
 }
 
 function handleUpdateOne(row: any) {
@@ -53,11 +76,29 @@ function handleUpdateOne(row: any) {
 }
 
 function handleDeleteOne(row: any) {
-  console.log(row)
+  ElMessageBox.confirm(
+      `是否删除角色【${row.roleName}】`,
+      '确认',
+      {
+        confirmButtonText: '确认',
+        cancelButtonText: '取消',
+        type: 'warning',
+      },
+  ).then(async () => {
+    const { code, msg } = await roleApi.deleteSystemRoleApi(row.roleId)
+    if (code === 200) {
+      ElMessage.success('删除成功')
+    }
+    else {
+      ElMessage.error(msg)
+    }
+  }).finally(() => {
+    getList()
+  })
 }
 
-function handleSelectionChange() {
-  console.log(multipleSelection.value)
+function handleSelectionChange(val: any) {
+  multipleSelection.value = val
 }
 
 function handleStatusChange(row: any) {
@@ -66,8 +107,8 @@ function handleStatusChange(row: any) {
     status: row.status,
   }
   ElMessageBox.confirm(
-      `是否修改角色状态为${row.status === '0' ? '启用' : '停用'}`,
-      'Warning',
+      `是否${row.status === '0' ? '启用' : '停用'}角色【${row.roleName}】`,
+      '确认',
       {
         confirmButtonText: '确认',
         cancelButtonText: '取消',
