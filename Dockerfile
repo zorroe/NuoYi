@@ -1,6 +1,6 @@
-# syntax = docker/dockerfile:1
+# syntax = docker/dockerfile:experimental
 
-ARG NODE_VERSION=18.14.2
+ARG NODE_VERSION=18.18.0
 
 FROM node:${NODE_VERSION}-slim as base
 
@@ -13,10 +13,10 @@ WORKDIR /src
 # Build
 FROM base as build
 
-COPY --link package.json package-lock.json .
+COPY package.json package-lock.json .
 RUN npm install --production=false
 
-COPY --link . .
+COPY . .
 
 RUN npm run build
 RUN npm prune
