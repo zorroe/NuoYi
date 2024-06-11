@@ -1,4 +1,4 @@
-import type { RoleParams } from './types'
+import type { BaseResponse, RoleParams } from './types'
 
 export default {
   systemRoleListApi(params: RoleParams) {
@@ -6,6 +6,14 @@ export default {
       url: '/system/role/list',
       method: 'GET',
       params,
+    })
+  },
+
+  roleChangeStatusApi(data: any) {
+    return useRequest<BaseResponse>({
+      url: '/system/role/changeStatus',
+      method: 'PUT',
+      data,
     })
   },
 }

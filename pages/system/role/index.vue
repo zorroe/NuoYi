@@ -44,10 +44,6 @@ function handleReset() {
   getList()
 }
 
-function getRoleStatus() {
-
-}
-
 function handleDelete() {
 
 }
@@ -65,7 +61,30 @@ function handleSelectionChange() {
 }
 
 function handleStatusChange(row: any) {
-  console.log(row)
+  const data = {
+    roleId: row.roleId,
+    status: row.status,
+  }
+  ElMessageBox.confirm(
+      `是否修改角色状态为${row.status === '0' ? '启用' : '停用'}`,
+      'Warning',
+      {
+        confirmButtonText: '确认',
+        cancelButtonText: '取消',
+        type: 'warning',
+      },
+  ).then(async () => {
+    const { code, msg } = await roleApi.roleChangeStatusApi(data)
+    if (code === 200) {
+      ElMessage.success('操作成功')
+    }
+    else {
+      row.status = row.status === '0' ? '1' : '0'
+      ElMessage.error(msg)
+    }
+  }).catch(() => {
+    row.status = row.status === '0' ? '1' : '0'
+  })
 }
 
 onMounted(() => {
