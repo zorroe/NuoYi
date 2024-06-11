@@ -4,6 +4,15 @@ definePageMeta({
   icon: 'i-mdi:home',
   hidden: false,
 })
+
+const links = ref([
+  { icon: 'i-logos-nuxt-icon', title: 'Nuxt3', href: 'https://nuxt.com/', target: '_blank' },
+  { icon: 'i-logos-vue', title: 'Vue3', href: 'https://vuejs.org/', target: '_blank' },
+  { icon: 'i-logos-element', title: 'Element Plus', href: 'https://element-plus.org/', target: '_blank' },
+  { icon: 'i-logos-pinia', title: 'Pinia', href: 'https://pinia.vuejs.org/', target: '_blank' },
+  { icon: 'i-logos-unocss', title: 'UnoCSS', href: 'https://unocss.dev/', target: '_blank' },
+  { icon: 'i-logos-sass', title: 'Sass', href: 'https://sass-lang.com/', target: '_blank' },
+])
 </script>
 
 <template>
@@ -58,69 +67,20 @@ definePageMeta({
               <span>技术选型</span>
             </div>
           </template>
-          <div>
-            <el-text size="large">
-              前端技术
-            </el-text>
+          <div class="flex gap-4">
+            <template v-for="(link, idx) in links" :key="idx">
+              <el-tooltip :content="link.title" placement="top">
+                <el-link
+                  :href="link.href"
+                  :target="link.target"
+                >
+                  <el-icon size="32">
+                    <div :class="link.icon" />
+                  </el-icon>
+                </el-link>
+              </el-tooltip>
+            </template>
           </div>
-          <el-row>
-            <el-col :span="12">
-              <ul>
-                <li>
-                  <el-link
-                    href="https://nuxt.com/"
-                    target="_blank"
-                  >
-                    Nuxt3
-                  </el-link>
-                </li>
-                <li>
-                  <el-link
-                    href="https://cn.vuejs.org/"
-                    target="_blank"
-                  >
-                    Vue3
-                  </el-link>
-                </li>
-                <li>
-                  <el-link
-                    href="https://unocss.dev/"
-                    target="_blank"
-                  >
-                    UnoCSS
-                  </el-link>
-                </li>
-              </ul>
-            </el-col>
-            <el-col :span="12">
-              <ul>
-                <li>
-                  <el-link
-                    href="https://pinia.vuejs.org/zh/"
-                    target="_blank"
-                  >
-                    Pinia
-                  </el-link>
-                </li>
-                <li>
-                  <el-link
-                    href="https://element-plus.org/zh-CN/"
-                    target="_blank"
-                  >
-                    ElementPlus
-                  </el-link>
-                </li>
-                <li>
-                  <el-link
-                    href="https://sass-lang.com/"
-                    target="_blank"
-                  >
-                    Sass
-                  </el-link>
-                </li>
-              </ul>
-            </el-col>
-          </el-row>
         </el-card>
       </el-col>
     </el-row>
