@@ -6,6 +6,7 @@ definePageMeta({
   icon: 'i-mdi:account-group',
 })
 
+const { sys_normal_disable } = useDict('sys_normal_disable')
 const tableRef = ref<any>()
 const searchFormRef = ref()
 
@@ -43,6 +44,10 @@ function handleReset() {
   getList()
 }
 
+function getRoleStatus() {
+
+}
+
 function handleDelete() {
 
 }
@@ -57,6 +62,10 @@ function handleDeleteOne(row: any) {
 
 function handleSelectionChange() {
   console.log(multipleSelection.value)
+}
+
+function handleStatusChange(row: any) {
+  console.log(row)
 }
 
 onMounted(() => {
@@ -75,7 +84,18 @@ onMounted(() => {
           <el-input v-model="searchParams.roleName" placeholder="角色名称" clearable style="width: 220px" />
         </el-form-item>
         <el-form-item label="角色状态" prop="status">
-          <el-input v-model="searchParams.status" placeholder="角色状态" clearable style="width: 220px" />
+          <el-select
+            v-model="searchParams.status"
+            placeholder="角色状态"
+            style="width: 220px"
+          >
+            <el-option
+              v-for="item in sys_normal_disable"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            />
+          </el-select>
         </el-form-item>
         <el-form-item label="创建时间" prop="createTime">
           <el-date-picker
@@ -85,13 +105,13 @@ onMounted(() => {
           />
         </el-form-item>
         <el-form-item>
-          <el-button v-throttle type="primary">
+          <el-button v-throttle type="primary" @click="getList">
             搜索
             <template #icon>
               <i-mdi-search />
             </template>
           </el-button>
-          <el-button v-throttle>
+          <el-button v-throttle @click="handleReset">
             <template #icon>
               <i-mdi-refresh />
             </template>
@@ -133,14 +153,23 @@ onMounted(() => {
     <el-col :span="24" class="mt-2">
       <el-table
         ref="tableRef" v-loading="loading" :data="tableData"
-        class="mt-2" @selection-change="handleSelectionChange"
+        @selection-change="handleSelectionChange"
       >
         <el-table-column type="selection" width="50" />
         <el-table-column prop="roleId" label="角色编号" width="110" />
         <el-table-column prop="roleName" label="角色名称" />
         <el-table-column prop="roleKey" label="权限字符" />
         <el-table-column prop="roleSort" label="显示顺序" width="100" />
-        <el-table-column prop="status" label="角色状态" width="100" />
+        <el-table-column prop="status" label="角色状态" width="100">
+          <template #default="scope">
+            <el-switch
+              v-model="scope.row.status"
+              active-value="0"
+              inactive-value="1"
+              @change="handleStatusChange(scope.row)"
+            />
+          </template>
+        </el-table-column>
         <el-table-column prop="createTime" label="创建时间" />
         <el-table-column label="操作" width="220">
           <template #default="scope">

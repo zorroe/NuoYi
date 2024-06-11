@@ -11,6 +11,8 @@ definePageMeta({
   icon: 'i-mdi:account',
 })
 
+const { sys_normal_disable, sys_user_sex } = useDict('sys_normal_disable', 'sys_user_sex')
+
 const columns = ref([
   { key: 1, label: `用户名称`, visible: true },
   { key: 2, label: `用户昵称`, visible: true },
@@ -251,8 +253,8 @@ onMounted(() => {
             <el-form-item label="状态" prop="status">
               <el-select v-model="searchParams.status" placeholder="用户状态" style="width: 220px">
                 <el-option
-                  v-for="item in userStatusOptions" :key="item.dictValue" :label="item.dictLabel"
-                  :value="item.dictValue"
+                  v-for="item in sys_normal_disable" :key="item.value" :label="item.label"
+                  :value="item.value"
                 />
               </el-select>
             </el-form-item>
@@ -445,10 +447,10 @@ onMounted(() => {
             <el-form-item label="用户性别">
               <el-select v-model="form.sex" placeholder="请选择">
                 <el-option
-                  v-for="dict in userSexOptions"
-                  :key="dict.dictValue"
-                  :label="dict.dictLabel"
-                  :value="dict.dictValue"
+                  v-for="dict in sys_user_sex"
+                  :key="dict.value"
+                  :label="dict.label"
+                  :value="dict.value"
                 />
               </el-select>
             </el-form-item>
