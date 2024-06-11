@@ -6,7 +6,7 @@
     <div class="flex-1 flex flex-col">
       <NavBar />
       <el-scrollbar class="flex-1">
-        <div class="p-2">
+        <div class="w-96% mx-auto py-2">
           <slot />
         </div>
       </el-scrollbar>
