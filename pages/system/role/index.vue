@@ -72,7 +72,6 @@ function handleDelete() {
 }
 
 function handleUpdateOne(row: any) {
-  console.log(row)
 }
 
 function handleDeleteOne(row: any) {

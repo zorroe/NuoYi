@@ -15,6 +15,7 @@ declare module 'vue' {
     IMdiEye: typeof import('~icons/mdi/eye')['default']
     IMdiKey: typeof import('~icons/mdi/key')['default']
     IMdiLogout: typeof import('~icons/mdi/logout')['default']
+    IMdiMenuSwap: typeof import('~icons/mdi/menu-swap')['default']
     IMdiPencil: typeof import('~icons/mdi/pencil')['default']
     IMdiPerson: typeof import('~icons/mdi/person')['default']
     IMdiPlus: typeof import('~icons/mdi/plus')['default']
