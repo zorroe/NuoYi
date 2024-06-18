@@ -7,6 +7,7 @@ export default antfu({
     'unused-imports/no-unused-vars': 0,
     'node/prefer-global/process': 0,
     'no-console': 1,
+    'vue/no-mutating-props': 0,
   },
   formatters: {
     css: true,

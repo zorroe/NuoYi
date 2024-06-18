@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import EditModal from './EditModal.vue'
 import deptApi from '~/api/dept'
 
 definePageMeta({
@@ -18,6 +19,8 @@ const loading = ref<boolean>(false)
 const tableData = ref<any>([])
 const refreshTable = ref(true)
 const isExpandAll = ref(false)
+const editRow = ref<any>({})
+const dialogVisible = ref(false)
 
 async function getList() {
   loading.value = true
@@ -42,6 +45,11 @@ function toogleExpandAll() {
   nextTick(() => {
     refreshTable.value = true
   })
+}
+
+function editDept(row: any) {
+  editRow.value = row
+  dialogVisible.value = true
 }
 
 function handleDeleteOne(row: any) {
@@ -152,7 +160,7 @@ onMounted(() => {
         <el-table-column label="操作" align="center">
           <template #default="scope">
             <el-tooltip content="修改" placement="top">
-              <el-button circle size="small">
+              <el-button circle size="small" @click="editDept(scope.row)">
                 <template #icon>
                   <i-mdi-pencil />
                 </template>
@@ -177,6 +185,7 @@ onMounted(() => {
       </el-table>
     </el-col>
   </el-row>
+  <EditModal v-model:dialog-visible="dialogVisible" :data="editRow" dialog-title="编辑部门" />
 </template>
 
 <style scoped></style>
