@@ -1,5 +1,6 @@
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
+import { getToken } from '~/utils/auth'
 import { usePermissionStore } from '~/store/permission'
 
 NProgress.configure({
@@ -19,13 +20,24 @@ export default defineNuxtPlugin((_nuxtApp) => {
     useHead({
       title: `${to.meta.title} | ${useRuntimeConfig().public.projectName}`,
     })
-    if (whiteList.includes(to.path)) {
+    if (getToken()) {
+      if (whiteList.includes(to.path)) {
+        next()
+        return
+      }
+      usePermissionStore().generateRouter()
+      NProgress.start()
       next()
-      return
     }
-    usePermissionStore().generateRouter()
-    NProgress.start()
-    next()
+    else {
+      if (whiteList.includes(to.path)) {
+        next()
+      }
+      else {
+        next(`/login?redirect=${to.fullPath}`) // 否则全部重定向到登录页
+        NProgress.done()
+      }
+    }
   })
 
   router.afterEach(() => {

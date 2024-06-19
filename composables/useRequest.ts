@@ -52,7 +52,6 @@ export const useRequest = function <T = ResponseData>(options: RequestOption) {
       if (response._data.code !== 200) {
         if (response._data.code === 401) {
           navigateTo('/login')
-          ElMessage.error(response._data.msg)
         }
       }
     },
